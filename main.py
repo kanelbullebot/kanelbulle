@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+ # lets configure that Bot prefix, if you want to change this, go ahead! Do note that documentations might not work properly if you do.
 bot = commands.Bot(command_prefix='<')
 
 @bot.event
@@ -14,8 +15,8 @@ async def add(ctx, a: int, b: int):
 
 @bot.command()
 async def multiply(ctx, a: int, b: int):
-    await ctx.send(a*b)
-
+    async with ctx.typing():
+        await ctx.send(a*b)
 
 
 @bot.command()
