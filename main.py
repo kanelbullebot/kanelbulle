@@ -8,6 +8,7 @@ import traceback
 import aiohttp
 import sys
 import json
+import subprocess
 
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
@@ -22,7 +23,8 @@ def get_prefix(bot, message):
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 
-initial_extensions = ['cogs.simple']
+initial_extensions = ['cogs.simple',
+                      'cogs.admin']
 
  # lets configure that Bot prefix, if you want to change this, go ahead! Do note that documentations might not work properly if you do.
 bot = commands.Bot(command_prefix=get_prefix, description='A cool bot made with <3 by Tristan Farkas')
