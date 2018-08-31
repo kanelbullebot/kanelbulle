@@ -2,12 +2,15 @@ import discord
 from discord.ext import commands
 import datetime, re
 import json, asyncio
-import permissions
 import copy
 import logging
 import traceback
 import aiohttp
 import sys
+import json
+
+with open("config.json") as dataf:
+    returnconfig = json.load(dataf)
 
 def get_prefix(bot, message):
 
@@ -65,4 +68,4 @@ async def help(ctx):
 
     await ctx.send(embed=embed)
 
-bot.run('token-here')
+bot.run(returnconfig['token'])
