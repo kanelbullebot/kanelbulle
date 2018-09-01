@@ -15,7 +15,7 @@ with open("config.json") as dataf:
 
 def get_prefix(bot, message):
 
-    prefixes = ['<']
+    prefixes = ['<.']
 
     if not message.guild:
         return '?'
