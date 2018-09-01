@@ -9,7 +9,6 @@ class AdminCog:
     def __init__(self, bot):
         self.bot = bot
 
-    # Hidden means it won't show up on the default help.
     @commands.command(name='load', hidden=True)
     @commands.is_owner()
     async def cog_load(self, ctx, *, cog: str):
@@ -52,7 +51,7 @@ class AdminCog:
 
     @commands.command(name='hotreload', hidden=True)
     @commands.is_owner()
-    async def cog_reload(self, ctx, *, cog: str):
+    async def cog_reload(self, ctx):
         """We get the latest updates to the whitelisted cogs from Git."""
 
         try:
@@ -64,7 +63,7 @@ class AdminCog:
         except Exception as e:
             await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**`Kanelbulle has successfully updated with NO Downtime! Wowee!`**')
 
 
 def setup(bot):
