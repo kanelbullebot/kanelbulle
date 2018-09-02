@@ -48,15 +48,15 @@ async def on_ready():
 
 
 
-# @bot.command()
-# async def info(ctx):
-#    embed = discord.Embed(title="Kanelbulle", description="Made with <3 by Tristan Farkas.", color=0xeee657)
-#    embed.add_field(name="Author", value="@tristanfarkas#0001")
-#    embed.add_field(name="Github repository", value="https://github.com/trilleplay/kanelbulle/")
-#    embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
-#    embed.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
+@bot.command()
+async def info(ctx):
+    embedinfo = discord.Embed(title="Kanelbulle Info", description="Some very neat info!", color=0xeee657)
+    embedinfo.add_field(name="Author", value="@tristanfarkas#0001")
+    embedinfo.add_field(name="Github repository", value="https://github.com/trilleplay/kanelbulle/")
+    embedinfo.add_field(name="Guild count", value=f"{len(bot.guilds)}")
+    embedinfo.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
 
-#    await ctx.send(embed=embed)
+    await ctx.send(embed=embedinfo)
 
 bot.remove_command('help')
 
