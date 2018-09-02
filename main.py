@@ -55,7 +55,8 @@ async def info(ctx):
     embedinfo.add_field(name="Github repository", value="https://github.com/trilleplay/kanelbulle/")
     embedinfo.add_field(name="Guild count", value=f"{len(bot.guilds)}")
     embedinfo.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
-
+    embedinfo.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
+    
     await ctx.send(embed=embedinfo)
 
 bot.remove_command('help')
@@ -68,6 +69,7 @@ async def help(ctx):
     embed.add_field(name="<multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
     embed.add_field(name="<info", value="Gives some helpful stats about Kanelbulle.", inline=False)
     embed.add_field(name="<help", value="Prints out information/docs on how to use Kanelbulle.", inline=False)
+    embed.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
 
     await ctx.send(embed=embed)
 
