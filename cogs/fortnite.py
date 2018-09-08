@@ -7,12 +7,13 @@ import json
 class FortniteCog:
     """FortniteCog"""
 
-    with open("cogconfig.json") as fortnitedataf:
-        returnfortniteconfig = json.load(fortnitedataf)
 
     def __init__(self, bot):
         self.bot = bot
 
+    with open("cogconfig.json") as fortnitedataf:
+        returnfortniteconfig = json.load(fortnitedataf)
+        
     @commands.command(name='fstatssquad')
     async def fortnitestatssquad(self, ctx, *, username: str):
         """Gets a players squad Fortnite stats."""
