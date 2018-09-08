@@ -10,9 +10,6 @@ class FortniteCog:
 
     def __init__(self, bot):
         self.bot = bot
-
-    with open("cogconfig.json") as fortnitedataf:
-        returnfortniteconfig = json.load(fortnitedataf)
         
     @commands.command(name='fstatssquad')
     async def fortnitestatssquad(self, ctx, *, username: str):
@@ -20,7 +17,7 @@ class FortniteCog:
         url = "https://api.fortnitetracker.com/v1/profile/pc/" + "/" + (username)
 
         headerssquad = {
-            'TRN-Api-Key': (returnfortniteconfig["fortniteapikey"]),
+            'TRN-Api-Key': "FortniteTrackerApiKey",
             'Cache-Control': "no-cache",
         }
 
@@ -46,7 +43,7 @@ class FortniteCog:
         url = "https://api.fortnitetracker.com/v1/profile/pc/" + "/" + (username)
 
         headerssolo = {
-            'TRN-Api-Key': (returnfortniteconfig["fortniteapikey"]),
+            'TRN-Api-Key': "FortniteTrackerApiKey",
             'Cache-Control': "no-cache",
         }
 
@@ -72,7 +69,7 @@ class FortniteCog:
         url = "https://api.fortnitetracker.com/v1/profile/pc/" + "/" + (username)
 
         headersduo = {
-            'TRN-Api-Key': (returnfortniteconfig["fortniteapikey"]),
+            'TRN-Api-Key': "FortniteTrackerApiKey",
             'Cache-Control': "no-cache",
         }
 
