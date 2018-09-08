@@ -58,6 +58,8 @@ class AdminCog:
             process = subprocess.Popen(bashgitpull.split(), stdout=subprocess.PIPE)
             self.bot.unload_extension('cogs.simple')
             self.bot.load_extension('cogs.simple')
+            self.bot.unload_extension('cogs.fortnite')
+            self.bot.load_extension('cogs.fortnite')
             self.bot.unload_extension('cogs.moderating')
             self.bot.load_extension('cogs.moderating')
             self.bot.unload_extension('cogs.admin')
