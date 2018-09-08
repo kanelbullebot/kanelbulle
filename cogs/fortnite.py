@@ -7,7 +7,7 @@ import json
 class FortniteCog:
     """FortniteCog"""
 
-    with open("./../config.json") as fortnitedataf:
+    with open("cogconfig.json") as fortnitedataf:
         returnfortniteconfig = json.load(fortnitedataf)
 
     def __init__(self, bot):
