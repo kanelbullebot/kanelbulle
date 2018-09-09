@@ -11,7 +11,7 @@ class FortniteCog:
     def __init__(self, bot):
         self.bot = bot
 
-        
+
     @commands.command(name='fstatssquad')
     async def fortnitestatssquad(self, ctx, *, username: str):
         """Gets a players squad Fortnite stats."""
@@ -24,16 +24,17 @@ class FortniteCog:
 
         responsesquad = requests.get(url, headers=headerssquad)
         print(responsesquad.text)
-        jsfstatssolo = responsesquad.json()
+        jsfstatssquad = responsesquad.json()
 
         fortnitestatsembedsquad = discord.Embed(title='Squad Fortnite Stats',
                               description='Showing Squad Fortnite stats! Through the magic of Kanelbulle.',
                               colour=0x98FB98)
 
         fortnitestatsembedsquad.add_field(name="Username", value=(username))
-        fortnitestatsembedsquad.add_field(name="Lifetime K/D", value=(jsfstatssolo["stats"]["p9"]["kd"]["value"]))
-        fortnitestatsembedsquad.add_field(name="Lifetime Kills", value=(jsfstatssolo["stats"]["p9"]["kills"]["value"]))
-        fortnitestatsembedsquad.add_field(name="Matches Played", value=(jsfstatssolo["stats"]["p9"]["matches"]["value"]))
+        fortnitestatsembedsquad.add_field(name="Lifetime K/D", value=(jsfstatssquad["stats"]["p9"]["kd"]["value"]))
+        fortnitestatsembedsquad.add_field(name="Lifetime Kills", value=(jsfstatssquad["stats"]["p9"]["kills"]["value"]))
+        fortnitestatsembedsquad.add_field(name="Matches Played", value=(jsfstatssquad["stats"]["p9"]["matches"]["value"]))
+        fortnitestatsembedsquad.add_field(name="Wins", value=(jsfstatssquad["stats"]["p9"]["top1"]["value"]))
 
         fstatssquad = "Showing Fortnite Squad Stats for: " + (username)
         await ctx.send(content=fstatssquad, embed=fortnitestatsembedsquad)
@@ -60,6 +61,7 @@ class FortniteCog:
         fortnitestatsembedsolo.add_field(name="Lifetime K/D", value=(jsfstatssolo["stats"]["p2"]["kd"]["value"]))
         fortnitestatsembedsolo.add_field(name="Lifetime Kills", value=(jsfstatssolo["stats"]["p2"]["kills"]["value"]))
         fortnitestatsembedsolo.add_field(name="Matches Played", value=(jsfstatssolo["stats"]["p2"]["matches"]["value"]))
+        fortnitestatsembedsolo.add_field(name="Wins", value=(jsfstatssolo["stats"]["p2"]["top1"]["value"]))
 
         fstatssolo = "Showing Fortnite Solo Stats for: " + (username)
         await ctx.send(content=fstatssolo, embed=fortnitestatsembedsolo)
@@ -86,6 +88,7 @@ class FortniteCog:
         fortnitestatsembedduo.add_field(name="Lifetime K/D", value=(jsfstatsduo["stats"]["p10"]["kd"]["value"]))
         fortnitestatsembedduo.add_field(name="Lifetime Kills", value=(jsfstatsduo["stats"]["p10"]["kills"]["value"]))
         fortnitestatsembedduo.add_field(name="Matches Played", value=(jsfstatsduo["stats"]["p10"]["matches"]["value"]))
+        fortnitestatsembedduo.add_field(name="Matches Played", value=(jsfstatsduo["stats"]["p10"]["top1"]["value"]))
 
         fstatsduo = "Showing Fortnite Duo Stats for: " + (username)
         await ctx.send(content=fstatsduo, embed=fortnitestatsembedduo)
