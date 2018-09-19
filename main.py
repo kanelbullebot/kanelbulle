@@ -81,6 +81,6 @@ async def ping(ctx):
     '''
 
     latency = bot.latency
-    await ctx.send(latency)
+    ctx.send('🏓 {0}'.format(round(latency, 1))
 
 bot.run(returnconfig['token'])
