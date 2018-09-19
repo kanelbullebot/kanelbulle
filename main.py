@@ -57,7 +57,7 @@ async def info(ctx):
     embedinfo.add_field(name="Guild count", value=f"{len(bot.guilds)}")
     embedinfo.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
     embedinfo.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
-    
+
     await ctx.send(embed=embedinfo)
 
 bot.remove_command('help')
@@ -73,5 +73,15 @@ async def help(ctx):
     embed.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
 
     await ctx.send(embed=embed)
+
+@bot.command()
+async def ping(ctx):
+    '''
+    Shows and measures bot ping.
+    '''
+
+    latency = bot.latency
+    howmuchlatency = "Latency:" (latency)
+    await ctx.send(howmuchlatency)
 
 bot.run(returnconfig['token'])
