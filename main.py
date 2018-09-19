@@ -80,7 +80,6 @@ async def ping(ctx):
     Shows and measures bot ping.
     '''
 
-    latency = bot.latency
-    ctx.send('🏓 {0}'.format(round(latency, 1))
+    ctx.send('🏓 {0}'.format(round(bot.latency, 1))
 
 bot.run(returnconfig['token'])
