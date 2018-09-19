@@ -73,13 +73,14 @@ async def help(ctx):
     embed.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
 
     await ctx.send(embed=embed)
-
-@bot.command()
+             
 async def ping(ctx):
-    '''
-    Shows and measures bot ping.
-    '''
+    latency = bot.latency
+    embedping = discord.Embed(title="Ping!", description="Ping the bot!", color=0xedab49)
 
-    ctx.send('🏓 {0}'.format(round(bot.latency, 1))
+    embedping.add_field(name="🏓", inline=False)
+    embedping.add_field(name="Latency", value=(latency), inline=False)
+
+    await ctx.send(embed=embedping)
 
 bot.run(returnconfig['token'])
