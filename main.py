@@ -79,7 +79,7 @@ async def ping(ctx):
     latency = bot.latency
     embedping = discord.Embed(title="Ping!", description="Ping the bot!", color=0xedab49)
 
-    embedping.add_field(name="🏓", inline=False)
+    embedping.add_field(name="🏓", value=("🏓"), inline=False)
     embedping.add_field(name="Latency", value=(latency), inline=False)
 
     await ctx.send(embed=embedping)
