@@ -7,7 +7,7 @@ class EvalCog:
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command(pass_context=True, hidden=True name='eval')
+    @commands.command(name='eval')
     @commands.is_owner()
     async def debug(self, ctx, *, code : str):
         """Evaluates code."""
