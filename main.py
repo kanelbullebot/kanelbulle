@@ -26,8 +26,7 @@ def get_prefix(bot, message):
 initial_extensions = ['cogs.simple',
                       'cogs.admin',
                       'cogs.moderating',
-                      'cogs.fortnite',
-                      'cogs.eval']
+                      'cogs.fortnite']
 
  # lets configure that Bot prefix, if you want to change this, go ahead! Do note that documentations might not work properly if you do.
 bot = commands.Bot(command_prefix=get_prefix, description='A cool bot made with <3 by Tristan Farkas')
