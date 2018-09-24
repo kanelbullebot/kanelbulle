@@ -76,7 +76,7 @@ async def help(ctx):
 
 @bot.command()
 async def ping(ctx):
-    latency = bot.latency
+    latency = bot.latency*1000
     embedping = discord.Embed(title="Ping!", description="Ping the bot!", color=0xedab49)
 
     embedping.add_field(name="🏓", value=("🏓"), inline=False)
