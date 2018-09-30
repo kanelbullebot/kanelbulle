@@ -15,11 +15,36 @@ class ModCog:
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='ban')
-    async def banusr(self, ctx, member: discord.Member, reason: str):
-        await ctx.message.guild.ban(member)
-        await ctx.send("User has been banned. oof.")
+    async def banusr(self, ctx, member, reason: str = "No reason provided"):
+        try:
+            toban = await commands.MemberConverter().convert(ctx, argument=member)
+        except:
+            try:
+                toban = await commands.UserConverter().convert(ctx, argument=member)
+            except:
+                raise commands.BadArgument(message=ctx)
+        await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
+        await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
+    @commands.has_permissions(ban_members=True)
+    @commands.command(name='softban')
+    async def softbanusr(self, ctx, member, reason: str = "No reason provided"):
+        try:
+            toban = await commands.MemberConverter().convert(ctx, argument=member)
+        except:
+            try:
+                toban = await commands.UserConverter().convert(ctx, argument=member)
+            except:
+                raise commands.BadArgument(message=ctx)
+        await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} (Softban) - {reason}")
+        await ctx.message.guild.unban(toban, reason = f"{ctx.author} (Softban) - {reason}")
+        await ctx.send(f":eyes: {str(toban)} has been soft banned.\nThis means they have been kicked, with messages less than 7 days old deleted.")
 
+    @commands.has_permissions(kick_members=True)
+    @commands.command(name='kick')
+    async def kickusr(self, ctx, member: discord.Member, reason: str = "No reason provided"):
+        await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
+        await ctx.send(f":eyes: {str(member)} has been kicked. oof.")
 
 
 # Add moderating cog to main instance.

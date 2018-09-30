@@ -48,15 +48,15 @@ async def on_ready():
 @bot.event
 async def on_message(ctx):
     context = await bot.get_context(ctx)
-        if context.valid:
-            if isinstance(ctx.channel, discord.TextChannel):
-                if not ctx.channel.permissions_for(ctx.channel.guild.me).send_messages:
-                    try:
-                        await ctx.author.send(f"*Houston, we have a problem!*\nYou tried to use `{ctx.content}` in {ctx.channel.mention}, but I don't have message permissions there.\nGive me perms and try again!")
-                    except discord.Forbidden:
-                        pass # DMs disabled!
-                else:
-                    await bot.process_commands(ctx)
+    if context.valid:
+        if isinstance(ctx.channel, discord.TextChannel):
+            if not ctx.channel.permissions_for(ctx.channel.guild.me).send_messages:
+                try:
+                    await ctx.author.send(f"*Houston, we have a problem!*\nYou tried to use `{ctx.content}` in {ctx.channel.mention}, but I don't have message permissions there.\nGive me perms and try again!")
+                except discord.Forbidden:
+                    pass # DMs disabled!
+            else:
+                await bot.process_commands(ctx)
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
