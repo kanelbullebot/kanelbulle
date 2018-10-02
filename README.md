@@ -17,5 +17,6 @@ I wanted to make a Discord bot, i was eating Kanelbullar, long story short.
 
 ## Self hosting.
 Ey wanting to self-host? No problem there is some boring stuff that will need to be done.
-
-First things first, make sure you have Python3 and pip installed, from there all you need to do is to get the rewrite branch of discord.py, and edit the config file. After that you're ready to go!
+1. Make sure you have docker installed.
+2. build the docker container and run it
+3. Profit?
