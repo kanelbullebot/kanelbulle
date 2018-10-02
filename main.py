@@ -80,7 +80,6 @@ async def help(ctx):
     embed = discord.Embed(title="Kanelbulle", description="Made with <3 by Tristan Farkas.", color=0xedab49)
 
     embed.add_field(name="<add X Y", value="Gives the addition of **X** and **Y**", inline=False)
-    embed.add_field(name="<multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
     embed.add_field(name="<info", value="Gives some helpful stats about Kanelbulle.", inline=False)
     embed.add_field(name="<help", value="Prints out information/docs on how to use Kanelbulle.", inline=False)
     embed.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
