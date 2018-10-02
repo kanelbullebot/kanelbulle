@@ -16,6 +16,7 @@ with open("config.json") as dataf:
 def get_prefix(bot, message):
 
     prefixes = ['<.']
+    status = discord.Game("Kanelbulle v.1.0.0")
 
     if not message.guild:
         return '?'
@@ -44,6 +45,7 @@ if __name__ == '__main__':
 async def on_ready():
     print(bot.user.name)
     print('Signed into bot user.')
+    await bot.change_presence(status=discord.Status.online, activity=status)
 
 @bot.event
 async def on_message(ctx):
