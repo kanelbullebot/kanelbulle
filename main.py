@@ -46,6 +46,10 @@ async def on_ready():
     print('Signed into bot user.')
     statusdiscord = discord.Game("Kanelbulle v.1.0.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    print('Servers connected to:')
+    for server in bot.servers:
+        serverlistonready = (server.name) "-" (server.id)
+        print(serverlistonready)
 
 @bot.event
 async def on_message(ctx):
