@@ -103,7 +103,7 @@ class SimpleCog:
                     try:
                         integered = int(msg.content)
                         try:
-                            if results[integered - 1] and integerd > 0:
+                            if results[integered - 1] and integered > 0:
                                 await genwiki(results[integered - 1], ctx)
                             else:
                                 await ctx.send("That result isn't in the list, aborting...")
