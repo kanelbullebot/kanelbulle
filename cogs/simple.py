@@ -91,7 +91,7 @@ class SimpleCog:
             else:
                 result_list = ""
                 for timeslooped, result in enumerate(results):
-                    result_list += f"{result} - {timeslooped+1}\n"
+                    result_list += f"{timeslooped+1} - {result}\n"
                 await ctx.send(f"Say the number of a result of the above\n\n```{result_list}```")
                 def check(m):
                     return m.author == ctx.author
