@@ -5,6 +5,7 @@ import contextlib
 import traceback
 import textwrap
 import io
+import wikipedia
 
 class SimpleCog:
     """SimpleCog"""
@@ -66,6 +67,61 @@ class SimpleCog:
         if isinstance(body[-1], ast.With):
             insert_returns(body[-1].body)
 
+
+    @commands.command(name="wiki", aliases=["wikipedia"])
+    async def search_wiki(self, ctx, *, tosearch: str):
+        await ctx.trigger_typing()
+        async def genwiki(pagename, ctx):
+            await ctx.trigger_typing()
+            page = wikipedia.page(pagename)
+            if len(page.summary) > 300:
+                summary = page.summary[:300]+"..."
+            else:
+                summary = page.summary
+            linkname = pagename.replace(" ", "_")
+            wikiembed = discord.Embed(title=f'{pagename} - Wikipedia',
+                            description=f"{summary}\n\n[Read more](https://en.wikipedia.org/wiki/{linkname})",
+                            colour=0x98FB98)
+            wikiembed.set_thumbnail(url=page.images[0])
+            await ctx.send(embed=wikiembed)
+        results = wikipedia.search(tosearch, 5)
+        if results:
+            if len(results) == 1 or tosearch.lower() == results[0].lower():
+                await genwiki(results[0], ctx)
+            else:
+                result_list = ""
+                for timeslooped, result in enumerate(results):
+                    result_list += f"{timeslooped+1} - {result}\n"
+                await ctx.send(f"Say the number of a result of the above\n\n```{result_list}```")
+                def check(m):
+                    return m.author == ctx.author
+                msg = await self.bot.wait_for("message", check=check, timeout=60)
+                lowered = msg.content.lower()
+                if msg == None:
+                    await ctx.send("Timeout reached, aborting...")
+                else:
+                    try:
+                        integered = int(msg.content)
+                        try:
+                            if results[integered - 1] and integered > 0:
+                                await genwiki(results[integered - 1], ctx)
+                            else:
+                                await ctx.send("That result isn't in the list, aborting...")
+                        except:
+                            await ctx.send("That result isn't in the list, aborting...")
+                    except:
+                        numbers_stringed = {"one": 1,
+                        "two": 2,
+                        "three": 3,
+                        "four": 4,
+                        "five": 5}
+                        try:
+                            if results[numbers_stringed[msg.content] - 1]:
+                                await genwiki(results[numbers_stringed[msg.content] - 1], ctx)
+                        except:
+                            await ctx.send("That result isn't in the list, aborting...\nYou must provide a number.")
+        else:
+            await ctx.send(f"I found nothing about `{tosearch}` on Wikipedia, did you commit a typo?")
 
     @commands.command(hidden=True, name='eval')
     @commands.is_owner()
