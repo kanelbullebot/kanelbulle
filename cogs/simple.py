@@ -115,6 +115,7 @@ class SimpleCog:
                 page = wikipedia.page(pagename)
             except wikipedia.exceptions.DisambiguationError as error:
                 await genlist(error.options[:5], 1, pagename)
+                return
             except wikipedia.exceptions.PageError:
                 linkname = pagename.replace(" ", "_")
                 await ctx.send(f"That page doesn't exist.\nYou are referencing a page that is referenced in the wiki, but Wikipedia is returning a 404 error (Page doesn't exist).\n\nYou could, anyway, create one: https://en.wikipedia.org/wiki/{linkname}")
