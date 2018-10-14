@@ -5,6 +5,6 @@ ADD config.json /
 ADD /cogs/ /cogs/
 ADD /.git/ /.git/
 
-RUN pip install asyncio requests
+RUN pip install asyncio requests wikipedia
 RUN pip install -U git+https://github.com/Rapptz/discord.py@rewrite
 CMD [ "python", "./main.py" ]
