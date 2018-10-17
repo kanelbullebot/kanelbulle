@@ -8,6 +8,7 @@ python:
 services:
   - docker
 before_install:
-  - docker build -t kanelbulle .
+  - wget https://raw.githubusercontent.com/trilleplay/kanelbulle/master/tests/importandrun.py
+  - docker build -t kanelbulle-ci .
 script:
-  - docker run kanelbulle
+  - docker run kanelbulle-ci
