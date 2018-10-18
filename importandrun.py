@@ -11,7 +11,6 @@ import json
 import subprocess
 import os
 
-
 def get_prefix(bot, message):
 
     prefixes = ['<.']
@@ -48,6 +47,7 @@ async def on_ready():
     channelci = bot.get_channel(502208688224862219)
     await channelci.send('The Travis test ran successfully! YAY! ')
     await asyncio.sleep(10)
+    await sys.exit()
 
 @bot.event
 async def on_message(ctx):
