@@ -42,9 +42,12 @@ if __name__ == '__main__':
 @bot.event
 async def on_ready():
     print(bot.user.name)
-    print('Signed into bot user.')
+    print('its time for some testing, beep-boop.')
     statusdiscord = discord.Game("Kanelbulle Testing")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    channel = client.get_channel(502208688224862219)
+    await channel.send('The Travis test ran successfully! YAY! ')
+    await asyncio.sleep(10)
 
 @bot.event
 async def on_message(ctx):
