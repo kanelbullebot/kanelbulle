@@ -1,4 +1,5 @@
 # Kanelbulle
+[![Build Status](https://travis-ci.org/trilleplay/kanelbulle.svg?branch=master)](https://travis-ci.org/trilleplay/kanelbulle)
 Kanelbulle is the simple solution for moderating your Discord!
 
 ## Request Kanelbulle to be added.
