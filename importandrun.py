@@ -9,6 +9,7 @@ import aiohttp
 import sys
 import json
 import subprocess
+import os
 
 
 def get_prefix(bot, message):
