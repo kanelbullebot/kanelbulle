@@ -23,7 +23,7 @@ class ModCog:
                 toban = await commands.UserConverter().convert(ctx, argument=member)
             except:
                 raise commands.BadArgument(message=ctx)
-        await ctx.message.guild.unban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
+        await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
     @commands.has_permissions(ban_members=True)
