@@ -23,22 +23,9 @@ class ModCog:
                 toban = await commands.UserConverter().convert(ctx, argument=member)
             except:
                 raise commands.BadArgument(message=ctx)
-        await ctx.message.guild.unban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
+        await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
-    @commands.has_permissions(ban_members=True)
-    @commands.command(name='unban')
-    async def unbanusr(self, ctx, member, reason: str = "No reason provided"):
-        try:
-            tounban = await commands.MemberConverter().convert(ctx, argument=member)
-        except:
-            try:
-                tounban = await commands.UserConverter().convert(ctx, argument=member)
-            except:
-                raise commands.BadArgument(message=ctx)
-        await ctx.message.guild.unban(tounban, reason = f"{ctx.author} (Unban) - {reason}")
-        await ctx.send(f":eyes: {str(toban)} has been unbanned. ")
-        
     @commands.has_permissions(ban_members=True)
     @commands.command(name='softban')
     async def softbanusr(self, ctx, member, reason: str = "No reason provided"):
