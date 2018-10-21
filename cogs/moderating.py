@@ -38,7 +38,7 @@ class ModCog:
                 raise commands.BadArgument(message=ctx)
         await ctx.message.guild.unban(tounban, reason = f"{ctx.author} (Unban) - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been unbanned. ")
-        
+
     @commands.has_permissions(ban_members=True)
     @commands.command(name='softban')
     async def softbanusr(self, ctx, member, reason: str = "No reason provided"):
@@ -58,6 +58,38 @@ class ModCog:
     async def kickusr(self, ctx, member: discord.Member, reason: str = "No reason provided"):
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
         await ctx.send(f":eyes: {str(member)} has been kicked. oof.")
+
+    @commands.command(name='lock')
+    @commands.has_permissions(manage_roles=True)
+    @commands.bot_has_permissions(manage_roles=True)
+    async def lock_channel(self, ctx, *, reason:str = "No reason provided"):
+        owrites = ctx.channel.overwrites_for(ctx.guild.default_role)
+        if owrites.send_messages == False:
+            await ctx.send("This channel is already locked!")
+        else:
+            owrites.send_messages = False
+            await ctx.channel.set_permissions(ctx.guild.default_role, overwrite=owrites, reason = f"{ctx.author} (Lock) - {reason}")
+            owrites = discord.PermissionOverwrite(send_messages = True)
+            await ctx.channel.set_permissions(ctx.guild.me, overwrite = owrites, reason = f"{ctx.author} (Lock) - {reason} - This action has been done so that Kanelbulle can later unlock the channel.")
+            await ctx.send(f"Channel locked! Now people without a role can not send messages.\n\nReason:```{reason}```")
+
+    @commands.command(name='unlock')
+    @commands.has_permissions(manage_roles=True)
+    @commands.bot_has_permissions(manage_roles=True)
+    async def unlock_channel(self, ctx, *, reason:str = "No reason provided"):
+        owrites = ctx.channel.overwrites_for(ctx.guild.default_role)
+        if owrites.send_messages == True or owrites.send_messages == None:
+            await ctx.send("This channel isn't locked!")
+        else:
+            owrites.send_messages = True
+            await ctx.channel.set_permissions(ctx.guild.default_role, overwrite=owrites, reason = f"{ctx.author} (Unlock) - {reason}")
+            await ctx.send("Channel unlocked! Now people without a role can send messages.")
+            owrites = ctx.channel.overwrites_for(ctx.guild.me)
+            owrites.send_messages = None
+            if owrites.is_empty():
+                await ctx.channel.set_permissions(ctx.guild.me, overwrite=None, reason = f"{ctx.author} (Lock) - {reason} - This action was done so that Kanelbulle can later unlock the channel, switching it back to normal.")
+            else:
+                await ctx.channel.set_permissions(ctx.guild.me, overwrite=owrites, reason = f"{ctx.author} (Lock) - {reason} - This action was done so that Kanelbulle can later unlock the channel, switching it back to normal.")
 
 
 # Add moderating cog to main instance.
