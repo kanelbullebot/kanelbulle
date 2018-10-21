@@ -37,7 +37,7 @@ if __name__ == '__main__':
         try:
             bot.load_extension(extension)
         except Exception as e:
-            print(f'Kanelbulle couldn not load: {extension}.', file=sys.stderr)
+            print(f"Kanelbulle couldn't load: {extension}.", file=sys.stderr)
             traceback.print_exc()
 
 @bot.event
