@@ -1,0 +1,14 @@
+sudo: required
+
+language: python
+python:
+  - "3.6"
+  - "3.6-dev"  # 3.6 development branch
+  - "3.7-dev"  # 3.7 development branch
+services:
+  - docker
+before_install:
+  - pip install asyncio requests wikipedia
+  - pip install -U git+https://github.com/Rapptz/discord.py@rewrite
+script:
+  - python3 importandrun.py
