@@ -155,7 +155,7 @@ class AdminCog:
       
     @commands.command(name='depart')
     @commands.is_owner()
-    async def server_depart(self, ctx, *, guildtoleave: str):
+    async def server_depart(self, ctx, *, guildtoleave: int):
      
         leaveguild = self.bot.get_guild(guildtoleave)
         await leaveguild.leave()
