@@ -142,7 +142,7 @@ class AdminCog:
         page, page_num = Pages.basic_pages(pages, page_num, action)
         return f"**Eval output {page_num + 1}/{len(pages)}**\n```py\n{page}```", None, page_num
        
-    @commands.command(name='kN')
+    @commands.command(name='KanelbulleAdminID')
     @commands.is_owner()
     async def only_me(self, ctx):
 
