@@ -5,6 +5,7 @@ import traceback
 import textwrap
 import io
 import contextlib
+from main import whitelist
 
  # Declase bash scripts to run here.
 bashgitpull = "git pull"
@@ -74,7 +75,7 @@ class AdminCog:
             await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
         else:
             await ctx.send('**`Kanelbulle has successfully updated with NO Downtime! Wowee!`**')
-          
+
     # Eval Command - https://github.com/Rapptz/RoboDanny by Rapptz read credit.md for License
     def insert_returns(body):
         # insert return stmt if the last expression is a expression statement
@@ -90,7 +91,7 @@ class AdminCog:
         # for with blocks, again we insert returns into the body
         if isinstance(body[-1], ast.With):
             insert_returns(body[-1].body)
-          
+
     @commands.command(hidden=True, name='eval')
     @commands.is_owner()
     async def eval(self, ctx:commands.Context, *, code: str):
@@ -146,20 +147,26 @@ class AdminCog:
         pages = data["pages"]
         page, page_num = Pages.basic_pages(pages, page_num, action)
         return f"**Eval output {page_num + 1}/{len(pages)}**\n```py\n{page}```", None, page_num
-       
+
     @commands.command(name='KanelbulleAdminID')
     @commands.is_owner()
     async def only_me(self, ctx):
-
         await ctx.send(f' {ctx.author.mention} is an authorized Kanelbulle Global Admin.')
-      
+
     @commands.command(name='depart')
     @commands.is_owner()
     async def server_depart(self, ctx, *, guildtoleave: int):
-     
         leaveguild = self.bot.get_guild(guildtoleave)
         await leaveguild.leave()
         await ctx.send(f'Kanelbulle has now left {ctx.author.mention}. ')
+
+    @commands.command(name="reload_whitelist", hidden=True)
+    @commands.is_owner()
+    async def reload_whitelist_file(self, ctx):
+        print("Whitelist reloading")
+        with open("whitelist.json") as whitelistf:
+            whitelist = json.load(whitelistf)
+        await ctx.send("Whitelist reloaded!")
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
