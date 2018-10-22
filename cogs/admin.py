@@ -151,7 +151,7 @@ class AdminCog:
     @commands.is_owner()
     async def only_me(self, ctx):
 
-        await ctx.send(f'Hello {ctx.author.mention}. This command can only be used by you!!')
+        await ctx.send(f' {ctx.author.mention} is an authorized Kanelbulle Global Admin.')
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
