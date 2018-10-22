@@ -157,7 +157,7 @@ class AdminCog:
     @commands.is_owner()
     async def server_depart(self, ctx, *, guildtoleave: str):
      
-        leaveguild = bot.get_guild(guildtoleave)
+        leaveguild = self.bot.get_guild(guildtoleave)
         await leaveguild.leave()
         await ctx.send(f'Kanelbulle has now left {ctx.author.mention}. ')
 
