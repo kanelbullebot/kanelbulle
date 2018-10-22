@@ -13,12 +13,6 @@ class SimpleCog:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='repeat', aliases=['copy', 'mimic'])
-    async def do_repeat(self, ctx, *, our_input: str):
-        """A simple command which repeats our input.
-        In rewrite Context is automatically passed to our commands as the first argument after self."""
-
-        await ctx.send(our_input)
 
     @commands.command(name='add', aliases=['plus'])
     @commands.guild_only()
@@ -34,23 +28,6 @@ class SimpleCog:
 
         await ctx.send(f'Hello {ctx.author.mention}. This command can only be used by you!!')
 
-    @commands.command(name='embeds')
-    @commands.guild_only()
-    async def example_embed(self, ctx):
-
-        embed = discord.Embed(title='Embed',
-                              description='Showcasing the use of Embeds...\nSee the visualizer for more info.',
-                              colour=0x98FB98)
-        embed.set_author(name='TristanFarkas',
-                         url='https://github.com/trilleplay')
-                #         icon_url='http://i.imgur.com/ko5A30P.png')
-
-        embed.add_field(name="Github repository", value="https://github.com/trilleplay/kanelbulle/")
-        embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
-        embed.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
-
-
-        await ctx.send(content='**Kanelbulle**', embed=embed)
  # Eval Command - https://github.com/Rapptz/RoboDanny by Rapptz read credit.md for License
     def insert_returns(body):
         # insert return stmt if the last expression is a expression statement
