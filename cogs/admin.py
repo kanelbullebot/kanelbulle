@@ -1,5 +1,10 @@
 from discord.ext import commands
 import subprocess
+import discord
+import traceback
+import textwrap
+import io
+import contextlib
 
  # Declase bash scripts to run here.
 bashgitpull = "git pull"
