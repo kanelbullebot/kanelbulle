@@ -152,6 +152,14 @@ class AdminCog:
     async def only_me(self, ctx):
 
         await ctx.send(f' {ctx.author.mention} is an authorized Kanelbulle Global Admin.')
+      
+    @commands.command(name='depart')
+    @commands.is_owner()
+    async def server_depart(self, ctx, *, guildtoleave: str):
+     
+        leaveguild = bot.get_guild(guildtoleave)
+        await leaveguild.leave()
+        await ctx.send(f'Kanelbulle has now left {ctx.author.mention}. ')
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
