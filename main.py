@@ -13,6 +13,9 @@ import subprocess
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
+with open("whitelist.json") as whitelistf:
+    whitelist = json.load(whitelistf)
+
 def get_prefix(bot, message):
 
     prefixes = ['<.']
@@ -46,6 +49,22 @@ async def on_ready():
     print('Signed into bot user.')
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    for guild in bot.guilds:
+        if not guild.id in whitelist:
+            print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
+            await guild.leave()
+
+@bot.event
+async def on_guild_join(guild):
+    if not guild.id in whitelist:
+        print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
+        await guild.leave()
+    else:
+        if guild.system_channel:
+            try:
+                await guild.system_channel.send("Hi! I'm Kanelbulle, thank you for adding me! My prefix is `<.`")
+            except discord.Forbidden:
+                pass
 
 @bot.event
 async def on_message(ctx):
@@ -58,7 +77,7 @@ async def on_message(ctx):
                 except discord.Forbidden:
                     pass # DMs disabled!
             else:
-                await bot.process_commands(ctx)
+                await bot.invoke(context) # Performance improvement
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
