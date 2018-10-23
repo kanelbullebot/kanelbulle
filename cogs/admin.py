@@ -160,13 +160,6 @@ class AdminCog:
         await leaveguild.leave()
         await ctx.send(f'Kanelbulle has now left {ctx.author.mention}. ')
 
-    @commands.command(name="reload_whitelist", hidden=True)
-    @commands.is_owner()
-    async def reload_whitelist_file(self, ctx):
-        print("Whitelist reloading")
-        with open("whitelist.json") as whitelistf:
-            whitelist = json.load(whitelistf)
-        await ctx.send("Whitelist reloaded!")
 
 def setup(bot):
     bot.add_cog(AdminCog(bot))
