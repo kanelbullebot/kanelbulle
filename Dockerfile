@@ -2,6 +2,7 @@ FROM python:3.6.5
 
 ADD main.py /
 ADD config.json /
+ADD whitelist.json /
 ADD /cogs/ /cogs/
 ADD /.git/ /.git/
 
