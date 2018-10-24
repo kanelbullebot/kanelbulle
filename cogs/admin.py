@@ -5,7 +5,6 @@ import traceback
 import textwrap
 import io
 import contextlib
-from main import whitelist
 
  # Declase bash scripts to run here.
 bashgitpull = "git pull"

@@ -13,9 +13,6 @@ import subprocess
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
-with open("whitelist.json") as whitelistf:
-    whitelist = json.load(whitelistf)
-
 def get_prefix(bot, message):
 
     prefixes = ['<.']
@@ -34,14 +31,12 @@ initial_extensions = ['cogs.simple',
  # lets configure that Bot prefix, if you want to change this, go ahead! Do note that documentations might not work properly if you do.
 bot = commands.Bot(command_prefix=get_prefix, description='A cool bot made with <3 by Tristan Farkas')
 
-# Load in those cogs.
-if __name__ == '__main__':
-    for extension in initial_extensions:
-        try:
-            bot.load_extension(extension)
-        except Exception as e:
-            print(f"Kanelbulle couldn't load: {extension}.", file=sys.stderr)
-            traceback.print_exc()
+for extension in initial_extensions:
+    try:
+        bot.load_extension(extension)
+    except Exception as e:
+        print(f"Kanelbulle couldn't load: {extension}.", file=sys.stderr)
+        traceback.print_exc()
 
 @bot.event
 async def on_ready():
@@ -49,14 +44,18 @@ async def on_ready():
     print('Signed into bot user.')
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    with open("whitelist.json") as whitelistf:
+        server_whitelist = json.load(whitelistf)
     for guild in bot.guilds:
-        if not guild.id in whitelist:
+        if not guild.id in server_whitelist:
             print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
             await guild.leave()
 
 @bot.event
 async def on_guild_join(guild):
-    if not guild.id in whitelist:
+    with open("whitelist.json") as whitelistf:
+        server_whitelist = json.load(whitelistf)
+    if not guild.id in server_whitelist:
         print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
         await guild.leave()
     else:
