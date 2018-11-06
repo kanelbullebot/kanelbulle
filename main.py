@@ -69,8 +69,8 @@ async def on_guild_join(guild):
                 pass
 
 @bot.event
-async def on_message(ctx, message:discord.Message):
-    if message.author.bot:
+async def on_message(ctx):
+    if ctx.author.bot:
         return False
     context = await bot.get_context(ctx)
     if context.valid:
