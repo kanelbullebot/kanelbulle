@@ -97,17 +97,6 @@ class SimpleCog:
             await ctx.send(f"I found nothing about `{tosearch}` on Wikipedia, did you commit a typo?")
 
 
-    async def on_member_ban(self, guild, user):
-        """Event Listener which is called when a user is banned from the guild.
-        For this example I will keep things simple and just print some info.
-        Notice how because we are in a cog class we do not need to use @bot.event
-        For more information:
-        http://discordpy.readthedocs.io/en/rewrite/api.html#discord.on_member_ban
-        Check above for a list of events.
-        """
-
-        print(f'{user.name}-{user.id} was banned from {guild.name}-{guild.id}')
-
 # The setup fucntion below is neccesarry. Remember we give bot.add_cog() the name of the class in this case SimpleCog.
 # When we load the cog, we use the name of the file.
 def setup(bot):
