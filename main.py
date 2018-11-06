@@ -22,8 +22,6 @@ def get_prefix(bot, message):
     if not message.guild:
         return '?'
     
-    if message.author.bot:
-        return
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
