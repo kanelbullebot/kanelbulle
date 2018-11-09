@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import discord
 from discord.ext import commands
 import datetime, re
@@ -19,6 +21,7 @@ def get_prefix(bot, message):
 
     if not message.guild:
         return '?'
+    
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
@@ -65,8 +68,32 @@ async def on_guild_join(guild):
             except discord.Forbidden:
                 pass
 
+            
+class DiscordBotsOrgAPI:
+    """Handles interactions with the discordbots.org API"""
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.token = returnconfig['dbltoken']
+        self.dblpy = dbl.Client(self.bot, self.token)
+        self.bot.loop.create_task(self.update_stats())
+
+    async def update_stats(self):
+        """This function runs every 30 minutes to automatically update your server count"""
+
+        while True:
+            logger.info('Sending server count of to DBL Weeeeee!')
+            try:
+                await self.dblpy.post_server_count()
+                logger.info('posted server count ({})'.format(len(self.bot.guilds)))
+            except Exception as e:
+                logger.exception('Failed to post server count\n{}: {}'.format(type(e).__name__, e))
+            await asyncio.sleep(1800)
+            
 @bot.event
 async def on_message(ctx):
+    if ctx.author.bot:
+        return False
     context = await bot.get_context(ctx)
     if context.valid:
         if isinstance(ctx.channel, discord.TextChannel):
