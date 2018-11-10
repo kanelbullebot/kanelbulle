@@ -1,5 +1,7 @@
 {
   "token": "BOT_TOKEN",
   "dbltoken": "DBL_TOKEN",
-  "giphy_token": "GIPHY_TOKEN"
+  "giphy_token": "GIPHY_TOKEN",
+  "webhook_channel": "WEBHOOK_CHANNEL",
+  "webhook_id": "WEBHOOK_ID"
 }
