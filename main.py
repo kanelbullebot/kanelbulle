@@ -94,7 +94,7 @@ class DiscordBotsOrgAPI:
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot:
-        if ctx.channel.id == 497860423773585414  and ctx.author.id == 510571823524610059:
+        if ctx.channel.id == returnconfig["webhook_channel"]  and ctx.author.id == returnconfig["webhook_id"]:
             ctx = await bot.get_context(ctx)
             loaded = json.loads(ctx.message.clean_content.replace("\\", ""))
             result = requests.get(f"https://api.giphy.com/v1/gifs/random?api_key={returnconfig['giphy_token']}&tag=cat,%20cute,%20kitten&rating=G").json()
