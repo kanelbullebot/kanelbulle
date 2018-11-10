@@ -11,6 +11,7 @@ import aiohttp
 import sys
 import json
 import subprocess
+import requests
 
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
@@ -21,7 +22,7 @@ def get_prefix(bot, message):
 
     if not message.guild:
         return '?'
-    
+
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
@@ -68,7 +69,7 @@ async def on_guild_join(guild):
             except discord.Forbidden:
                 pass
 
-            
+
 class DiscordBotsOrgAPI:
     """Handles interactions with the discordbots.org API"""
 
@@ -89,10 +90,26 @@ class DiscordBotsOrgAPI:
             except Exception as e:
                 logger.exception('Failed to post server count\n{}: {}'.format(type(e).__name__, e))
             await asyncio.sleep(1800)
-            
+
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot:
+        if ctx.channel.id == 497860423773585414 and ctx.author.id == 510571823524610059:
+            ctx = await bot.get_context(ctx)
+            loaded = json.loads(ctx.message.clean_content.replace("\\", ""))
+            result = requests.get(f"https://api.giphy.com/v1/gifs/random?api_key={returnconfig['giphy_token']}&tag=cat,%20cute,%20kitten&rating=G").json()
+            if loaded["isWeekend"]:
+                try:
+                    usr = await commands.UserConverter().convert(argument = loaded["user"], ctx = ctx)
+                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\nPlus, you voted on a weekend, meaning your vote counted x2. Awesome!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! <:MightyCat:510585327035875369>\n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
+                except discord.Forbidden:
+                    pass
+            else:
+                try:
+                    usr = await commands.UserConverter().convert(loaded["user"])
+                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! <:MightyCat:510585327035875369>\n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
+                except discord.Forbidden:
+                    pass
         return False
     context = await bot.get_context(ctx)
     if context.valid:
