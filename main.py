@@ -101,13 +101,13 @@ async def on_message(ctx):
             if loaded["isWeekend"]:
                 try:
                     usr = await commands.UserConverter().convert(argument = loaded["user"], ctx = ctx)
-                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\nPlus, you voted on a weekend, meaning your vote counted x2. Awesome!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! <:MightyCat:510585327035875369>\n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
+                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\nPlus, you voted on a weekend, meaning your vote counted x2. Awesome!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours!  \n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
                 except discord.Forbidden:
                     pass
             else:
                 try:
                     usr = await commands.UserConverter().convert(loaded["user"])
-                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! <:MightyCat:510585327035875369>\n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
+                    await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! \n\nWith the magic of *Giphy*:heart:\n"+result["data"]["images"]["original"]["url"])
                 except discord.Forbidden:
                     pass
         return False
