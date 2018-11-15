@@ -106,7 +106,7 @@ async def on_message(ctx):
                     pass
             else:
                 try:
-                    usr = await commands.UserConverter().convert(argument = loaded["user"])
+                    usr = await commands.UserConverter().convert(argument = loaded["user"], ctx = ctx)
                     await usr.send("***:heart: Thank you! :heart:***\n\nThanks for *voting me on DiscordBots*.\nThe Kanelbulle Team has put great effort into making Kanelbulle, and we appreciate a lot you appreciate our work!\n\nAs a thank you, here's a cute cat gif we hope you enjoy. If you want more, you can just vote us again in 12 hours! \n\nhttps://kanelbulle.herokuapp.com/serve/Poweredby_100px-White_VertLogo.png\n"+result["data"]["images"]["original"]["url"])
                 except discord.Forbidden:
                     pass
