@@ -26,8 +26,6 @@ class SimpleCog:
                     if member.bot:
                         if member == self.bot.user:
                             await ctx.send(f"You want to hug me? Thanks fren <:blobheart:466609019050524673>")
-                        else:
-                            await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
                     if message:
                         await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
                     else:
