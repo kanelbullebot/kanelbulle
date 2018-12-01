@@ -27,18 +27,22 @@ class SimpleCog:
                         if member == self.bot.user:
                             await ctx.send(f"You want to hug me? Thanks fren <:blobheart:466609019050524673>")
                         else:
-                            await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
-                    if message:
-                        await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
+                            if message:
+                                await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
+                            else:
+                                await ctx.send(f'{member.mention} was successfully hugged!')
                     else:
-                        await ctx.send(f'{member.mention} was successfully hugged!')
+                        if message:
+                            await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
+                        else:
+                            await ctx.send(f'{member.mention} was successfully hugged!')
+                else:
+                    await ctx.send("You hug the air. *smh*")
             else:
-                await ctx.send("You hug the air. *smh*")
-        else:
-            if tohug != None:
-                await ctx.send(f"You find yourself in a strange place. You search for something, a {tohug}, unsure what it is even.\nYou search far and wide, and, suddenly, you find {self.client.user.mention}, warning you that this command can't be used in DMs.\nThat was an unexpected ending, wasn't it?")
-            else:
-                await ctx.send("First, you haven't specified what to hug. Second, this command can't be used in DMs.\nWhat about if we move to a *real server*? duh.")
+                if tohug != None:
+                    await ctx.send(f"You find yourself in a strange place. You search for something, a {tohug}, unsure what it is even.\nYou search far and wide, and, suddenly, you find {self.client.user.mention}, warning you that this command can't be used in DMs.\nThat was an unexpected ending, wasn't it?")
+                else:
+                    await ctx.send("First, you haven't specified what to hug. Second, this command can't be used in DMs.\nWhat about if we move to a *real server*? duh.")
 
 
     @commands.command(name='add', aliases=['plus'])
