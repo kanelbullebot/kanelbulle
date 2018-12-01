@@ -15,7 +15,7 @@ class SimpleCog:
 
 
     @commands.command()
-    async def hug (self, ctx, *, tohug = None):
+    async def hug (self, ctx, tohug = None, *, message):
         if not isinstance(ctx.channel, discord.DMChannel):
             if tohug != None:
                 try:
@@ -23,7 +23,10 @@ class SimpleCog:
                 except:
                     await ctx.send(f"You try hugging {tohug} but can't find him. *smh*\nAre you sure you typed it correctly? Or is {tohug} hiding from you?")
                 else:
-                    await ctx.send(f"{member.mention} was successfully hugged!")
+                    if message:
+                        await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
+                    else:
+                        await ctx.send(f'{member.mention} was successfully hugged!')
             else:
                 await ctx.send("You hug the air. *smh*")
         else:
