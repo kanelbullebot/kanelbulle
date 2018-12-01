@@ -23,6 +23,11 @@ class SimpleCog:
                 except:
                     await ctx.send(f"You try hugging {tohug} but can't find him. *smh*\nAre you sure you typed it correctly? Or is {tohug} hiding from you?")
                 else:
+                    if member.bot:
+                        if member == self.client.user:
+                            await ctx.send(f"You want to hug me? Thanks :3 , but... I'm a bot. Get ***real friends.***")
+                        else:
+                            await ctx.send(f"{member.mention} is a bot. Hug something that exists.")
                     if message:
                         await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
                     else:
