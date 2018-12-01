@@ -15,7 +15,7 @@ class SimpleCog:
 
 
     @commands.command()
-    async def hug (self, ctx, tohug = None, *, message):
+    async def hug (self, ctx, tohug = None, *, message = None):
         if not isinstance(ctx.channel, discord.DMChannel):
             if tohug != None:
                 try:
