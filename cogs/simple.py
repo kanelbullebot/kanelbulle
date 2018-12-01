@@ -14,6 +14,25 @@ class SimpleCog:
         self.bot = bot
 
 
+    @commands.command()
+    async def hug (self, ctx, *, tohug = None):
+        if not isinstance(ctx.channel, discord.DMChannel):
+            if tohug != None:
+                try:
+                    member = await commands.MemberConverter().convert(ctx=ctx, argument=tohug)
+                except:
+                    await ctx.send(f"You try hugging {tohug} but can't find him. *smh*\nAre you sure you typed it correctly? Or is {tohug} hiding from you?")
+                else:
+                    await ctx.send(f"{member.mention} was successfully hugged!")
+            else:
+                await ctx.send("You hug the air. *smh*")
+        else:
+            if tohug != None:
+                await ctx.send(f"You find yourself in a strange place. You search for something, a {tohug}, unsure what it is even.\nYou search far and wide, and, suddenly, you find {self.client.user.mention}, warning you that this command can't be used in DMs.\nThat was an unexpected ending, wasn't it?")
+            else:
+                await ctx.send("First, you haven't specified what to hug. Second, this command can't be used in DMs.\nWhat about if we move to a *real server*? duh.")
+
+
     @commands.command(name='add', aliases=['plus'])
     @commands.guild_only()
     async def do_addition(self, ctx, first: int, second: int):
