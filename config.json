@@ -3,5 +3,6 @@
   "dbltoken": "DBL_TOKEN",
   "giphy_token": "GIPHY_TOKEN",
   "webhook_channel": "WEBHOOK_CHANNEL",
-  "webhook_id": "WEBHOOK_ID"
+  "webhook_id": "WEBHOOK_ID",
+  "sentry_dsn": "SENTRY_DSN"
 }
