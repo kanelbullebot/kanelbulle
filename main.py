@@ -9,6 +9,7 @@ import logging
 import traceback
 import aiohttp
 import sys
+import sentry_sdk
 import json
 import subprocess
 import requests
@@ -46,6 +47,7 @@ for extension in initial_extensions:
 async def on_ready():
     print(bot.user.name)
     print('Signed into bot user.')
+    sentry_sdk.init(returnconfig['sentry_dsn'])
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
     with open("whitelist.json") as whitelistf:
