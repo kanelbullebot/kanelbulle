@@ -17,6 +17,8 @@ import requests
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
+sentry_sdk.init(returnconfig['sentry_dsn'])
+
 def get_prefix(bot, message):
 
     prefixes = ['<.']
@@ -47,7 +49,6 @@ for extension in initial_extensions:
 async def on_ready():
     print(bot.user.name)
     print('Signed into bot user.')
-    sentry_sdk.init(returnconfig['sentry_dsn'])
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
     with open("whitelist.json") as whitelistf:
