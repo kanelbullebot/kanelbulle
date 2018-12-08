@@ -21,7 +21,7 @@ class SimpleCog:
                 try:
                     member = await commands.MemberConverter().convert(ctx=ctx, argument=tohug)
                 except:
-                    await ctx.send(f"You try hugging {tohug} but can't find him. *smh*\nAre you sure you typed it correctly? Or is {tohug} hiding from you?")
+                    await ctx.send(f"You try hugging ``{tohug}`` but can't find him. *smh*\nAre you sure you typed it correctly? Or is ``{tohug}`` hiding from you?")
                 else:
                     if member.bot:
                         if member == self.bot.user:
