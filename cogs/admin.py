@@ -53,7 +53,7 @@ class AdminCog:
         except Exception as e:
             await ctx.send(f'**`An error has occured:`** {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**`The cog has been successfully reloaded.`**')
 
     @commands.command(name='hotreload', hidden=True)
     @commands.is_owner()
