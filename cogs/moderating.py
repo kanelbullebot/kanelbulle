@@ -86,12 +86,12 @@ class ModCog:
                 await ctx.channel.set_permissions(ctx.guild.me, overwrite=owrites, reason = f"{ctx.author} (Lock) - {reason} - This action was done so that Kanelbulle can later unlock the channel, switching it back to normal.")
 
     @commands.group(pass_context=True)
-    async def clean(ctx):
+    async def clean(self, ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send('⚠️ Thats not a valid command! ⚠️')
 
     @clean.command()
-    async def all(ctx, mcount: int):
+    async def all(self, ctx, mcount: int):
         await ctx.channel.purge(limit=mcount)
         await ctx.send(f"🚨 {int(mcount)} messages have been deleted.🚨")
         
