@@ -85,7 +85,7 @@ class ModCog:
             else:
                 await ctx.channel.set_permissions(ctx.guild.me, overwrite=owrites, reason = f"{ctx.author} (Lock) - {reason} - This action was done so that Kanelbulle can later unlock the channel, switching it back to normal.")
 
-    @commands.group()
+    @self.bot.group()
     async def clean(ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send('⚠️ Thats not a valid command! ⚠️')
