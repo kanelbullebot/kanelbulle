@@ -9,7 +9,7 @@ class ModCog:
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='ban')
-    async def banusr(self, ctx, member, reason: str = "No reason provided"):
+    async def banusr(self, ctx, member, *, reason: str = "No reason provided"):
         try:
             toban = await commands.MemberConverter().convert(ctx, argument=member)
         except:
@@ -22,7 +22,7 @@ class ModCog:
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='unban')
-    async def unbanusr(self, ctx, member, reason: str = "No reason provided"):
+    async def unbanusr(self, ctx, member, *, reason: str = "No reason provided"):
         try:
             tounban = await commands.MemberConverter().convert(ctx, argument=member)
         except:
@@ -35,7 +35,7 @@ class ModCog:
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='softban')
-    async def softbanusr(self, ctx, member, reason: str = "No reason provided"):
+    async def softbanusr(self, ctx, member, *, reason: str = "No reason provided"):
         try:
             toban = await commands.MemberConverter().convert(ctx, argument=member)
         except:
@@ -49,7 +49,7 @@ class ModCog:
 
     @commands.has_permissions(kick_members=True)
     @commands.command(name='kick')
-    async def kickusr(self, ctx, member: discord.Member, reason: str = "No reason provided"):
+    async def kickusr(self, ctx, *, member: discord.Member, reason: str = "No reason provided"):
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
         await ctx.send(f":eyes: {str(member)} has been kicked. oof.")
 
