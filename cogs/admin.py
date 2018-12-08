@@ -24,9 +24,9 @@ class AdminCog:
         try:
             self.bot.load_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send(f'**`An error has occured:`** {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**`The cog has been successfully loaded.`**')
 
     @commands.command(name='unload', hidden=True)
     @commands.is_owner()
@@ -37,9 +37,9 @@ class AdminCog:
         try:
             self.bot.unload_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send(f'**`An error has occured:`** {type(e).__name__} - {e}')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**`The cog has been successfully unloaded.`**')
 
     @commands.command(name='reload', hidden=True)
     @commands.is_owner()
@@ -157,7 +157,7 @@ class AdminCog:
     async def server_depart(self, ctx, *, guildtoleave: int):
         leaveguild = self.bot.get_guild(guildtoleave)
         await leaveguild.leave()
-        await ctx.send(f'Kanelbulle has now left {ctx.author.mention}. ')
+        await ctx.send(f'Kanelbulle has now left that server. ')
 
 
 def setup(bot):
