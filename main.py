@@ -159,7 +159,7 @@ async def on_command_error(ctx: commands.Context, error):
             used_in = f"{ctx.channel.name}({ctx.channel.id}), guild {ctx.guild.name}({ctx.guild.id})"
         traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
         await log_channel.send(f"""
-***ERROR ALERT, <@&495874471706624021>s!***
+***ERROR ALERT, <@&{returnconfig['dev_role']}>s!***
 
 An error ocurred during the execution of a command:
 `{error}`
@@ -179,7 +179,7 @@ async def on_error(event, *args, **kwargs):
     t, error = sys.exec_info()
     traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
     await log_channel.send(f"""
-***ERROR ALERT, <@&495874471706624021>s!***
+***ERROR ALERT, <@&{returnconfig['dev_role']}>s!***
 
 An error ocurred during the execution of an event:
 `{error}`
