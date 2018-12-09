@@ -18,7 +18,7 @@ import sys
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
-#sentry_sdk.init(returnconfig['sentry_dsn'])
+sentry_sdk.init(returnconfig['sentry_dsn'])
 
 def get_prefix(bot, message):
 
