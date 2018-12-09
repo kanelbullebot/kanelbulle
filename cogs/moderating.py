@@ -9,40 +9,33 @@ class ModCog:
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='ban')
-    async def banusr(self, ctx, member, *, reason: str = "No reason provided"):
+    async def banusr(self, ctx, user, reason: str = "No reason provided"):
         try:
             toban = await commands.MemberConverter().convert(ctx, argument=member)
         except:
             try:
                 toban = await commands.UserConverter().convert(ctx, argument=member)
             except:
-                raise commands.BadArgument(message=ctx)
+                raise commands.BadArgument(message = f"User/Member {user} not found.")
         await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='unban')
-    async def unbanusr(self, ctx, member, *, reason: str = "No reason provided"):
-        try:
-            tounban = await commands.MemberConverter().convert(ctx, argument=member)
-        except:
-            try:
-                tounban = await commands.UserConverter().convert(ctx, argument=member)
-            except:
-                raise commands.BadArgument(message=ctx)
+    async def unbanusr(self, ctx, user:discord.User, reason: str = "No reason provided"):
         await ctx.message.guild.unban(tounban, reason = f"{ctx.author} (Unban) - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been unbanned. ")
 
     @commands.has_permissions(ban_members=True)
     @commands.command(name='softban')
-    async def softbanusr(self, ctx, member, *, reason: str = "No reason provided"):
+    async def softbanusr(self, ctx, user, reason: str = "No reason provided"):
         try:
             toban = await commands.MemberConverter().convert(ctx, argument=member)
         except:
             try:
                 toban = await commands.UserConverter().convert(ctx, argument=member)
             except:
-                raise commands.BadArgument(message=ctx)
+                raise commands.BadArgument(message=f"User/Member {user} not found.")
         await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} (Softban) - {reason}")
         await ctx.message.guild.unban(toban, reason = f"{ctx.author} (Softban) - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been soft banned.\nThis means they have been kicked, with messages less than 7 days old deleted.")
@@ -94,7 +87,7 @@ class ModCog:
     async def all(self, ctx, mcount: int):
         await ctx.channel.purge(limit=mcount)
         await ctx.send(f"🚨 {int(mcount)} messages have been deleted.🚨")
-        
+
 # Add moderating cog to main instance.
 def setup(bot):
     bot.add_cog(ModCog(bot))

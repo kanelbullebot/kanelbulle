@@ -35,6 +35,8 @@ initial_extensions = ['cogs.simple',
                       'cogs.moderating',
                       'cogs.fortnite']
 
+log_channel = None
+
  # lets configure that Bot prefix, if you want to change this, go ahead! Do note that documentations might not work properly if you do.
 bot = commands.Bot(command_prefix=get_prefix, description='A cool bot made with <3 by Tristan Farkas')
 
@@ -51,11 +53,15 @@ async def on_ready():
     print('Signed into bot user.')
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    global log_channel
+    log_channel = bot.get_channel(returnconfig["log_channel"])
+    setattr(bot, "log_channel", log_channel)
     with open("whitelist.json") as whitelistf:
         server_whitelist = json.load(whitelistf)
     for guild in bot.guilds:
         if not guild.id in server_whitelist:
-            print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
+            print(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
+            await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
             await guild.leave()
 
 @bot.event
@@ -63,8 +69,8 @@ async def on_guild_join(guild):
     with open("whitelist.json") as whitelistf:
         server_whitelist = json.load(whitelistf)
     if not guild.id in server_whitelist:
-        print(f"Kanelbulle joined a non-whitelisted server, {guild.name}. Kanelbulle is leaving.")
-        await guild.leave()
+        print(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
+        await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
     else:
         if guild.system_channel:
             try:
@@ -124,6 +130,49 @@ async def on_message(ctx):
                     pass # DMs disabled!
             else:
                 await bot.invoke(context) # Performance improvement
+
+@bot.event
+async def on_command_error(ctx: commands.Context, error):
+    if isinstance(error, commands.NoPrivateMessage):
+        await ctx.send("This command can not be used through DMs!")
+    elif isinstance(error, commands.BotMissingPermissions):
+        await ctx.send(f"Welp, this is awkward.\nI do not have enough permissions to run {ctx.command}!```error```")
+    elif isinstance(error, commands.DisabledCommand):
+        await ctx.send("This command is currently disabled and can not be used.")
+    elif isinstance(error, commands.CheckFailure):
+        await ctx.send(":lock: You don't have enough permissions to run this command!")
+    elif isinstance(error, commands.CommandOnCooldown):
+        await ctx.send(f"Woah there, you're too *hyped!*\nYou're on a cooldown.```{error}```")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"You are missing required arguments!\n{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send(f"One of your arguments is incorrect!\n`{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
+    elif isinstance(error, commands.CommandNotFound):
+        return
+
+    else:
+        await ctx.send(":rotating_light: Uh-Oh! An error just ocurred! The devs are already on it. Sorry my fren! :rotating_light:")
+        if isinstance(ctx.channel, discord.DMChannel):
+            used_in = f"DM {ctx.channel.id}"
+        else:
+            used_in = f"{ctx.channel.name}({ctx.channel.id}), guild {ctx.guild.name}({ctx.guild.id})"
+        await log_channel.send(f"""
+***ERROR ALERT, <@&495874471706624021>s!***
+
+`{error}`
+
+Command: `{ctx.invoked_with}`
+Command arguments: `{ctx.kwargs}` (Could be wrong, please refer to `Message contents`)
+Command used by: {ctx.author.mention} `{ctx.author.name}#{ctx.author.discriminator} {ctx.author.id}`
+Command used in: `{used_in}`
+Message id: `{ctx.message.id}`
+Message link: {ctx.message.jump_url}
+Message timestamp (UTC): `{ctx.message.created_at}`
+Message contents: `{ctx.message.content}`
+
+Traceback:
+```{traceback.format_exc()}```""")
+        raise error
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 

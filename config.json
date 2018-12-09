@@ -4,5 +4,6 @@
   "giphy_token": "GIPHY_TOKEN",
   "webhook_channel": "WEBHOOK_CHANNEL",
   "webhook_id": "WEBHOOK_ID",
-  "sentry_dsn": "SENTRY_DSN"
+  "sentry_dsn": "SENTRY_DSN",
+  "log_channel": "LOG_CHANNEL_ID"
 }
