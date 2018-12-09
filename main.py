@@ -160,6 +160,7 @@ async def on_command_error(ctx: commands.Context, error):
         await log_channel.send(f"""
 ***ERROR ALERT, <@&495874471706624021>s!***
 
+An error ocurred during the execution of a command:
 `{error}`
 
 Command: `{ctx.invoked_with}`
