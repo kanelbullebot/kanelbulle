@@ -176,7 +176,7 @@ Message contents: `{ctx.message.content}`""", embed = traceback_embed)
 
 @bot.event
 async def on_error(event, args, kwargs):
-    t, error = sys.exec_info()
+    t, error = sys.exc_info()
     traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
     await log_channel.send(f"""
 ***ERROR ALERT, <@&{returnconfig['dev_role']}>s!***
