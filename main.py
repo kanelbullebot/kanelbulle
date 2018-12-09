@@ -175,7 +175,7 @@ Message contents: `{ctx.message.content}`""", embed = traceback_embed)
         raise error
 
 @bot.event
-async def on_error(event, *args, **kwargs):
+async def on_error(event, args, kwargs):
     t, error = sys.exec_info()
     traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
     await log_channel.send(f"""
@@ -186,7 +186,7 @@ An error ocurred during the execution of an event:
 
 Event: `{event}`
 Event arguments: `{*args} - {**kwargs}`
-Event timestamp (UTC): `{datetime.datetime.utcnow()}""", embed = traceback_embed)
+Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embed)
     raise error
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
