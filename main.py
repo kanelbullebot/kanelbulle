@@ -185,7 +185,7 @@ An error ocurred during the execution of an event:
 `{error}`
 
 Event: `{event}`
-Event arguments: `{*args} - {**kwargs}`
+Event arguments: `{args} - {kwargs}`
 Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embed)
     raise error
 
