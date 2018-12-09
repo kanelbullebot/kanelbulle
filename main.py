@@ -156,6 +156,7 @@ async def on_command_error(ctx: commands.Context, error):
             used_in = f"DM {ctx.channel.id}"
         else:
             used_in = f"{ctx.channel.name}({ctx.channel.id}), guild {ctx.guild.name}({ctx.guild.id})"
+        traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
         await log_channel.send(f"""
 ***ERROR ALERT, <@&495874471706624021>s!***
 
@@ -168,10 +169,7 @@ Command used in: `{used_in}`
 Message id: `{ctx.message.id}`
 Message link: {ctx.message.jump_url}
 Message timestamp (UTC): `{ctx.message.created_at}`
-Message contents: `{ctx.message.content}`
-
-Traceback:
-```{traceback.format_exc()}```""")
+Message contents: `{ctx.message.content}`""", embed = )
         raise error
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
