@@ -147,7 +147,7 @@ async def on_command_error(ctx: commands.Context, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"You are missing required arguments!\n{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
     elif isinstance(error, commands.BadArgument):
-        await ctx.send(f"One of your arguments is incorrect!\n`{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
+        await ctx.send(f"One of your arguments is incorrect!\n`{error}`\n\nCommand usage: <.{ctx.command.signature}`")
     elif isinstance(error, commands.CommandNotFound):
         return
 
@@ -157,7 +157,7 @@ async def on_command_error(ctx: commands.Context, error):
             used_in = f"DM {ctx.channel.id}"
         else:
             used_in = f"{ctx.channel.name}({ctx.channel.id}), guild {ctx.guild.name}({ctx.guild.id})"
-        traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
+        traceback_embed = discord.Embed(title = "Traceback", description = "```"+"".join(traceback.format_tb(error.__traceback__))+"```", timestamp = ctx.message.created_at)
         await log_channel.send(f"""
 ***ERROR ALERT, <@&{returnconfig['dev_role']}>s!***
 
@@ -172,12 +172,12 @@ Message id: `{ctx.message.id}`
 Message link: {ctx.message.jump_url}
 Message timestamp (UTC): `{ctx.message.created_at}`
 Message contents: `{ctx.message.content}`""", embed = traceback_embed)
-        raise error
+        print("".join(traceback.format_tb(error.__traceback__)))
 
 @bot.event
 async def on_error(event, args, kwargs):
-    t, error = sys.exc_info()
-    traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
+    t, error, info = sys.exc_info()
+    traceback_embed = discord.Embed(title = "Traceback", description = "```"+"".join(traceback.format_tb(error.__traceback__))+"```", timestamp = datetime.datetime.utcnow())
     await log_channel.send(f"""
 ***ERROR ALERT, <@&{returnconfig['dev_role']}>s!***
 
@@ -187,7 +187,7 @@ An error ocurred during the execution of an event:
 Event: `{event}`
 Event arguments: `{args} - {kwargs}`
 Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embed)
-    raise error
+    print("".join(traceback.format_tb(error.__traceback__)))
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
