@@ -13,6 +13,7 @@ import sentry_sdk
 import json
 import subprocess
 import requests
+import sys
 
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
@@ -164,14 +165,29 @@ An error ocurred during the execution of a command:
 `{error}`
 
 Command: `{ctx.invoked_with}`
-Command arguments: `{ctx.kwargs}` (Could be wrong, please refer to `Message contents`)
+Command arguments: `{ctx.args} - {ctx.kwargs}` (Could be wrong, please refer to `Message contents`)
 Command used by: {ctx.author.mention} `{ctx.author.name}#{ctx.author.discriminator} {ctx.author.id}`
 Command used in: `{used_in}`
 Message id: `{ctx.message.id}`
 Message link: {ctx.message.jump_url}
 Message timestamp (UTC): `{ctx.message.created_at}`
-Message contents: `{ctx.message.content}`""", embed = )
+Message contents: `{ctx.message.content}`""", embed = traceback_embed)
         raise error
+
+@bot.event
+async def on_error(event, *args, **kwargs):
+    t, error = sys.exec_info()
+    traceback_embed = discord.Embed(title = "Traceback", description = traceback.format_exc, timestamp = ctx.message.created_at)
+    await log_channel.send(f"""
+***ERROR ALERT, <@&495874471706624021>s!***
+
+An error ocurred during the execution of an event:
+`{error}`
+
+Event: `{event}`
+Event arguments: `{*args} - {**kwargs}`
+Event timestamp (UTC): `{datetime.datetime.utcnow()}""", embed = traceback_embed)
+    raise error
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
