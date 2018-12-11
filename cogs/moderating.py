@@ -42,7 +42,7 @@ class ModCog:
 
     @commands.has_permissions(kick_members=True)
     @commands.command(name='kick')
-    async def kickusr(self, ctx, *, member: discord.Member, reason: str = "No reason provided"):
+    async def kickusr(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
         await ctx.send(f":eyes: {str(member)} has been kicked. oof.")
 
