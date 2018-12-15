@@ -13,6 +13,15 @@ class SimpleCog:
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command()
+    @commands.guild_only()
+    async def serverstats(ctx):
+        serverstats = discord.Embed()
+        serverstats.set_thumbnail(url=ctx.guild.icon_url)
+        serverstats.add_field(name="Guild Name", value=ctx.guild.name, inline=False)
+        serverstats.add_field(name="Server Location", value=ctx.guild.region, inline=False)
+        serverstats.add_field(name="ID", value=ctx.guild.id, inline=False)
+        serverstats.add_field(name="Member count", value=ctx.guild.member_count, inline=False)
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
