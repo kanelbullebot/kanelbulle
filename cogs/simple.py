@@ -22,6 +22,7 @@ class SimpleCog:
         serverstats.add_field(name="Server Location", value=ctx.guild.region, inline=False)
         serverstats.add_field(name="ID", value=ctx.guild.id, inline=False)
         serverstats.add_field(name="Member count", value=ctx.guild.member_count, inline=False)
+        await ctx.send(content="", embed=serverstats)
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
