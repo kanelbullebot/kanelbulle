@@ -8,6 +8,7 @@ class ModCog:
         self.bot = bot
 
     @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
     @commands.command(name='ban')
     async def banusr(self, ctx, user, reason: str = "No reason provided"):
         try:
@@ -21,12 +22,14 @@ class ModCog:
         await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
     @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
     @commands.command(name='unban')
     async def unbanusr(self, ctx, user:discord.User, reason: str = "No reason provided"):
         await ctx.message.guild.unban(tounban, reason = f"{ctx.author} (Unban) - {reason}")
         await ctx.send(f":eyes: {str(toban)} has been unbanned. ")
 
     @commands.has_permissions(ban_members=True)
+    @commands.bot_has_permissions(ban_members=True)
     @commands.command(name='softban')
     async def softbanusr(self, ctx, user, reason: str = "No reason provided"):
         try:
@@ -41,6 +44,7 @@ class ModCog:
         await ctx.send(f":eyes: {str(toban)} has been soft banned.\nThis means they have been kicked, with messages less than 7 days old deleted.")
 
     @commands.has_permissions(kick_members=True)
+    @commands.bot_has_permissions(kick_members=True)
     @commands.command(name='kick')
     async def kickusr(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
@@ -82,7 +86,9 @@ class ModCog:
     async def clean(self, ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send('⚠️ Thats not a valid command! ⚠️')
-
+            
+    @commands.has_permissions(manage_messages=True)
+    @commands.bot_has_permissions(manage_messages=True)
     @clean.command()
     async def all(self, ctx, mcount: int):
         await ctx.channel.purge(limit=mcount)
