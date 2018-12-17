@@ -72,6 +72,7 @@ async def on_guild_join(guild):
     if not guild.id in server_whitelist:
         print(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
         await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
+        await guild.leave()
     else:
         if guild.system_channel:
             try:
