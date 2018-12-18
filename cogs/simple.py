@@ -15,8 +15,8 @@ class SimpleCog:
 
     @commands.command()
     @commands.guild_only()
-    async def serverstats(self, ctx, *, guildid: int = 0):
-        if guildid == ctx.guild:
+    async def serverstats(self, ctx, *, guildid: int = null):
+        if guildid == null:
             serverstats = discord.Embed()
             serverstats.set_thumbnail(url=ctx.guild.icon_url)
             serverstats.add_field(name="Guild Name", value=ctx.guild.name, inline=False)
