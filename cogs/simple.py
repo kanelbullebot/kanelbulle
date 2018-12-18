@@ -25,12 +25,13 @@ class SimpleCog:
             serverstats.add_field(name="Member count", value=ctx.guild.member_count, inline=False)
             await ctx.send(content="", embed=serverstats)
         else:
+            selectedguildserverstats = self.bot.get_guild(guildid)
             serverstats = discord.Embed()
-            serverstats.set_thumbnail(url=guildid.icon_url)
-            serverstats.add_field(name="Guild Name", value=guildid.name, inline=False)
-            serverstats.add_field(name="Server Location", value=guildid.region, inline=False)
-            serverstats.add_field(name="ID", value=guildid.id, inline=False)
-            serverstats.add_field(name="Member count", value=guildid.member_count, inline=False)
+            serverstats.set_thumbnail(url=selectedguildserverstats.icon_url)
+            serverstats.add_field(name="Guild Name", value=selectedguildserverstats.name, inline=False)
+            serverstats.add_field(name="Server Location", value=selectedguildserverstats.region, inline=False)
+            serverstats.add_field(name="ID", value=selectedguildserverstats.id, inline=False)
+            serverstats.add_field(name="Member count", value=selectedguildserverstats.member_count, inline=False)
             await ctx.send(content="", embed=serverstats)
 
     @commands.command()
