@@ -15,14 +15,23 @@ class SimpleCog:
 
     @commands.command()
     @commands.guild_only()
-    async def serverstats(self, ctx):
-        serverstats = discord.Embed()
-        serverstats.set_thumbnail(url=ctx.guild.icon_url)
-        serverstats.add_field(name="Guild Name", value=ctx.guild.name, inline=False)
-        serverstats.add_field(name="Server Location", value=ctx.guild.region, inline=False)
-        serverstats.add_field(name="ID", value=ctx.guild.id, inline=False)
-        serverstats.add_field(name="Member count", value=ctx.guild.member_count, inline=False)
-        await ctx.send(content="", embed=serverstats)
+    async def serverstats(self, ctx, guildid: discord.Guild=None):
+        if guildid is None:
+            serverstats = discord.Embed()
+            serverstats.set_thumbnail(url=ctx.guild.icon_url)
+            serverstats.add_field(name="Guild Name", value=ctx.guild.name, inline=False)
+            serverstats.add_field(name="Server Location", value=ctx.guild.region, inline=False)
+            serverstats.add_field(name="ID", value=ctx.guild.id, inline=False)
+            serverstats.add_field(name="Member count", value=ctx.guild.member_count, inline=False)
+            await ctx.send(content="", embed=serverstats)
+        else:
+            serverstats = discord.Embed()
+            serverstats.set_thumbnail(url=guildid.icon_url)
+            serverstats.add_field(name="Guild Name", value=guildid.name, inline=False)
+            serverstats.add_field(name="Server Location", value=guildid.region, inline=False)
+            serverstats.add_field(name="ID", value=guildid.id, inline=False)
+            serverstats.add_field(name="Member count", value=guildid.member_count, inline=False)
+            await ctx.send(content="", embed=serverstats)
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
