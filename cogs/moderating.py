@@ -11,15 +11,20 @@ class ModCog:
     @commands.bot_has_permissions(ban_members=True)
     @commands.command(name='ban')
     async def banusr(self, ctx, user, reason: str = "No reason provided"):
-        try:
-            toban = await commands.MemberConverter().convert(ctx, argument=member)
-        except:
+        if user.top_role > ctx.guild.me.top_role:
+            raise commands.BadArgument(message = f"{user} Has a higher role then me, I'm unable to ban {user} without having a higher role than them.")
+        elif user.top_role > ctx.author.top_role:
+            raise commands.BadArgument(message = f"User/Member {user} has a higher role then you, you need to have a higher role then {user} to be able to ban them.")
+        else:
             try:
-                toban = await commands.UserConverter().convert(ctx, argument=member)
+                toban = await commands.MemberConverter().convert(ctx, argument=member)
             except:
-                raise commands.BadArgument(message = f"User/Member {user} not found.")
-        await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
-        await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
+                try:
+                    toban = await commands.UserConverter().convert(ctx, argument=member)
+                except:
+                    raise commands.BadArgument(message = f"User/Member {user} not found.")
+            await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
+            await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
     @commands.has_permissions(ban_members=True)
     @commands.bot_has_permissions(ban_members=True)
