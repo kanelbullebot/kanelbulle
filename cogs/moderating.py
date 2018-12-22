@@ -10,7 +10,7 @@ class ModCog:
     @commands.has_permissions(ban_members=True)
     @commands.bot_has_permissions(ban_members=True)
     @commands.command(name='ban')
-    async def banusr(self, ctx, user, reason: str = "No reason provided"):
+    async def banusr(self, ctx, user: discord.Member, *, reason: str = "No reason provided"):
         if user.top_role > ctx.guild.me.top_role:
             raise commands.BadArgument(message = f"{user} Has a higher role then me, I'm unable to ban {user} without having a higher role than them.")
         elif user.top_role > ctx.author.top_role:
