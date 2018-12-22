@@ -16,8 +16,8 @@ class ModCog:
         elif user.top_role > ctx.author.top_role:
             raise commands.BadArgument(message = f"User/Member {user} has a higher role then you, you need to have a higher role then {user} to be able to ban them.")
         else:
-            await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
-            await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
+            await ctx.message.guild.ban(user, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
+            await ctx.send(f":eyes: {str(user)} has been banned. oof.")
 
     @commands.has_permissions(ban_members=True)
     @commands.bot_has_permissions(ban_members=True)
