@@ -21,6 +21,8 @@ class ModCog:
             except:
                 try:
                     toban = await commands.UserConverter().convert(ctx, argument=member)
+                except:
+                    raise commands.BadArgument(message = f"User/Member {user} not found.")
             await ctx.message.guild.ban(toban, delete_message_days = 7, reason = f"{ctx.author} - {reason}")
             await ctx.send(f":eyes: {str(toban)} has been banned. oof.")
 
