@@ -12,9 +12,9 @@
   "docs_command": "The docs for Kanelbulle commands is available at: ",
   "ping_desc": "Ping the bot!",
   "global_admin_identify": "{ctx.author.mention} is an authorized Kanelbulle Global Admin.",
-  "fstatssquad_command_helpinfo": "Gets a players squad Fortnite stats."
-  "fstatsduo_command_helpinfo": "Gets a players duo Fortnite stats."
-  "fstatssolo_command_helpinfo": "Gets a players solo Fortnite stats."
+  "fstatssquad_command_helpinfo": "Gets a players squad Fortnite stats.",
+  "fstatsduo_command_helpinfo": "Gets a players duo Fortnite stats.",
+  "fstatssolo_command_helpinfo": "Gets a players solo Fortnite stats.",
   "fstats_embed_desc": "Showing Squad Fortnite stats! Through the magic of Kanelbulle.",
   "fstatssquad_command_title": "Squad Fortnite Stats",
   "fstatsduo_command_title": "Solo Fortnite Stats",
