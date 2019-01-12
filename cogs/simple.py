@@ -35,7 +35,7 @@ class SimpleCog:
                 serverstats.add_field(name="Member count", value=selectedguildserverstats.member_count, inline=False)
                 await ctx.send(content="", embed=serverstats)
             except:
-                raise commands.BadArgument(message=f"Server/Guild {guildid} could not found.")
+                raise commands.BadArgument(message=f"Server/Guild {guildid} could not be found.")
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
