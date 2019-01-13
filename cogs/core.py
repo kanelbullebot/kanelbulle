@@ -17,7 +17,7 @@ class CoreCog:
     async def redisconnect():
         try:
             global r
-            r = redis.Redis(host='localhost', port=6379, db=0)
+            r = await redis.Redis(host='localhost', port=6379, db=0)
         except:
             print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
             
