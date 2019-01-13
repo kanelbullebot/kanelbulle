@@ -4,3 +4,4 @@ wikipedia
 aiohttp
 dblpy
 sentry-sdk
+redis==3.0.1
