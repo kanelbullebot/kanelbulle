@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import ast
+import redis
 import contextlib
 import traceback
 import textwrap
@@ -12,7 +13,15 @@ class CoreCog:
 
     def __init__(self, bot):
         self.bot = bot
-
+        
+    async def redisconnect():
+        try:
+            global r
+            r = redis.Redis(host='localhost', port=6379, db=0)
+        except:
+            print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
+            
+    redisconnect()
     @commands.command()
     @commands.guild_only()
     async def serverstats(self, ctx, *, guildid: int = None):
