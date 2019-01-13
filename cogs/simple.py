@@ -7,8 +7,8 @@ import textwrap
 import io
 import wikipedia
 
-class SimpleCog:
-    """SimpleCog"""
+class CoreCog:
+    """CoreCog"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -147,4 +147,4 @@ class SimpleCog:
 
 
 def setup(bot):
-    bot.add_cog(SimpleCog(bot))
+    bot.add_cog(CoreCog(bot))
