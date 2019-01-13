@@ -30,7 +30,7 @@ def get_prefix(bot, message):
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 
-initial_extensions = ['cogs.simple',
+initial_extensions = ['cogs.core',
                       'cogs.admin',
                       'cogs.moderating',
                       'cogs.fortnite']
