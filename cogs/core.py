@@ -14,12 +14,12 @@ class CoreCog:
     def __init__(self, bot):
         self.bot = bot
         
-    async def redisconnect():
-        try:
-            global r
-            r = redis.Redis(host='localhost', port=6379, db=0)
-        except:
-            print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
+    # async def redisconnect():
+    #     try:
+    #         global r
+    #         r = redis.Redis(host='localhost', port=6379, db=0)
+    #     except:
+    #         print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
             
     # async def on_ready():
     #     await redisconnect()
