@@ -21,8 +21,8 @@ class CoreCog:
         except:
             print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
             
-    async def on_ready():
-        await redisconnect()
+    # async def on_ready():
+    #     await redisconnect()
     
     @commands.command()
     @commands.guild_only()
