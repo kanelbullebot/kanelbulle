@@ -17,11 +17,11 @@ class CoreCog:
     async def redisconnect():
         try:
             global r
-            r = await redis.Redis(host='localhost', port=6379, db=0)
+            r = redis.Redis(host='localhost', port=6379, db=0)
         except:
             print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
             
-    redisconnect()
+    await redisconnect()
     @commands.command()
     @commands.guild_only()
     async def serverstats(self, ctx, *, guildid: int = None):
