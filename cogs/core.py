@@ -51,7 +51,7 @@ class CoreCog:
     @commands.command()
     @commands.guild_only()
     async def userinfo(self, ctx, *, userid: int = None):
-        if guildid == None:
+        if userid == None:
             userinfo = discord.Embed()
             userinfo.set_thumbnail(url=ctx.author.avatar_url)
             userinfo.add_field(name="Username", value=ctx.author, inline=False)
