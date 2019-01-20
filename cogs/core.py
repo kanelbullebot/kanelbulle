@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import ast
-# import redis
+import redis
 import contextlib
 import traceback
 import textwrap
