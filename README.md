@@ -18,5 +18,4 @@ TBD
 I wanted to make a Discord bot, i was eating Kanelbullar, long story short.
 
 ## Self hosting.
-Ey wanting to self-host? I won't be able to provide any support, so just understand what you're getting yourself into, in most cases if you only want to use Kanelbulle in development state, just build the docker container and run it.
-Running in the Docker container is however not recommended to do in production.
+ez, just configure whitelist.json and config.json and then ``docker-compose up`` 
