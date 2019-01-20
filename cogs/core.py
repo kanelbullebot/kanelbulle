@@ -92,7 +92,7 @@ class CoreCog:
                 userinfo.add_field(name="Nickname", value=ctx.author.nick, inline=False)
                 userinfo.add_field(name="Status", value=status, inline=False)
                 await ctx.send(content="", embed=userinfo)
-                except:
+            except:
                     raise commands.BadArgument(message=f"User {userid} could not be found.")
                 
     @commands.command()
