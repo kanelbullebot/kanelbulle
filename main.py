@@ -9,7 +9,6 @@ import logging
 import traceback
 import aiohttp
 import sys
-import sentry_sdk
 import json
 import subprocess
 import requests
