@@ -47,7 +47,54 @@ class CoreCog:
                 await ctx.send(content="", embed=serverstats)
             except:
                 raise commands.BadArgument(message=f"Server/Guild {guildid} could not be found.")
-
+                
+    @commands.command()
+    @commands.guild_only()
+    async def userinfo(self, ctx, *, userid: int = None):
+        if guildid == None:
+            userinfo = discord.Embed()
+            userinfo.set_thumbnail(url=ctx.author.avatar_url)
+            userinfo.add_field(name="Username", value=ctx.author, inline=False)
+            userinfo.add_field(name="User ID", value=ctx.author.id, inline=False)
+            if ctx.author.status == discord.Status("dnd"):
+                status = "DND <:KanelbulleDnD:528992490003496962>"
+            else:
+                if ctx.author.status == discord.Status("online"):
+                    status = "Online <:KanelbulleOnline:528991869217013762>"
+                else:
+                    if ctx.author.status == discord.Status("idle"):
+                        status = "AFK <:KanelbulleAFK:528992291285630986>"
+                    else:
+                        status = "Offline <:KanelbulleOffline:528992410261258270>"
+                        
+            userinfo.add_field(name="Nickname", value=ctx.author.nick, inline=False)
+            userinfo.add_field(name="Status", value=status, inline=False)
+            await ctx.send(content="", embed=userinfo)
+        else:
+            try:
+                selecteduserinfostats = self.bot.get_guild(userid)
+                userinfo = discord.Embed()
+                userinfo.set_thumbnail(url=selecteduserinfostats.avatar_url)
+                usernameforselected = selecteduserinfostats.name + selecteduserinfostats.discriminator
+                userinfo.add_field(name="Username", value=usernameforselected, inline=False)
+                userinfo.add_field(name="User ID", value=userid, inline=False)
+                if selecteduserinfostats.status == discord.Status("dnd"):
+                    status = "DND <:KanelbulleDnD:528992490003496962>"
+                else:
+                    if selecteduserinfostats.status == discord.Status("online"):
+                        status = "Online <:KanelbulleOnline:528991869217013762>"
+                    else:
+                        if selecteduserinfostats.status == discord.Status("idle"):
+                            status = "AFK <:KanelbulleAFK:528992291285630986>"
+                        else:
+                            status = "Offline <:KanelbulleOffline:528992410261258270>"
+                        
+                userinfo.add_field(name="Nickname", value=ctx.author.nick, inline=False)
+                userinfo.add_field(name="Status", value=status, inline=False)
+                await ctx.send(content="", embed=userinfo)
+                except:
+                    raise commands.BadArgument(message=f"User {userid} could not be found.")
+                
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
         if not isinstance(ctx.channel, discord.DMChannel):
