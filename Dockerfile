@@ -1,11 +1,11 @@
 FROM python:3.6.5
 
 ADD main.py /
+ADD requirements.txt /
 ADD config.json /
 ADD whitelist.json /
 ADD /cogs/ /cogs/
 ADD /.git/ /.git/
 
-RUN pip install asyncio requests wikipedia Flask
-RUN pip install -U git+https://github.com/Rapptz/discord.py@rewrite
+RUN pip install -r requirements.txt
 CMD [ "python", "./main.py" ]
