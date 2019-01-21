@@ -51,10 +51,10 @@
   "serverstats_guild_name": "Guild Name",
   "serverstats_guild_not_found": "Server/Guild {guildid} could not be found.",
   "hug_user_not_found": "You try hugging ``{tohug}`` but I can't find them. *smh*\nAre you sure you typed their username correctly? Or is ``{tohug}`` hiding from you?",
-  "hug_bot": "You want to hug me? Thanks fren",
+  "hug_bot": "Quer me abraçar? Obrigado ;D",
   "hug_with_message": "{member.mention} was successfully hugged! \"{message}\"",
   "hug_no_message": "{member.mention} was successfully hugged!",
-  "hug_no_arguments": "You hug the air. *smh*",
+  "hug_no_arguments": "Abraçou o ar. *smh*",
   "hug_no_DMs": "You find yourself in a strange place. You search for something, a {tohug}, unsure what it is even.\nYou search far and wide, and, suddenly, you find {self.client.user.mention}, warning you that this command can't be used in DMs.\nThat was an unexpected ending, wasn't it?",
   "hug_serveral_args_invalid_dms": "First, you haven't specified what to hug. Second, this command can't be used in DMs.\nWhat about if we move to a *real server*? duh.",
   "wikipedia_page_disambiguation": "This page is a disambiguation.\n{pagename} may refer to:\n\n```{result_list}```",
@@ -64,6 +64,6 @@
   "wikipedia_response_not_a_number": "That result isn't in the list, aborting...\nYou must provide a number.",
   "wikipedia_page_404": "That page doesn't exist.\nYou are referencing a page that is referenced in the wiki, but Wikipedia is returning a 404 error (Page doesn't exist).\n\nYou could, anyway, create one: https://en.wikipedia.org/wiki/{linkname}",
   "wikipedia_timeout": "Wikipedia took too long to respond.\nWikipedia could be experiencing connectivity issues.",
-  "wikipedia_read_more": "Read more",
+  "wikipedia_read_more": "Ver mais",
   "wikipedia_no_page_found": "I found nothing about `{tosearch}` on Wikipedia, did you commit a typo?"
 }
