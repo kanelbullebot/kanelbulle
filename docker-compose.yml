@@ -1,4 +1,10 @@
 version: '3'
 services:
   bot:
-    build: .
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+  db:
+    image: postgres:latest
+    volumes:
+      - ./.data:/var/lib/postgresql/data
