@@ -10,5 +10,6 @@ ADD config.json /opt/Kanelbulle
 ADD whitelist.json /opt/Kanelbulle
 ADD /cogs/ /opt/Kanelbulle/cogs
 
+WORKDIR /opt/Kanelbulle/
 RUN pip install -r requirements.txt
 CMD [ "python", "./main.py" ]
