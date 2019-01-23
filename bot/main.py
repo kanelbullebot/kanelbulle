@@ -102,10 +102,7 @@ async def on_message(ctx):
     if context.valid:
         if isinstance(ctx.channel, discord.TextChannel):
             if not ctx.channel.permissions_for(ctx.channel.guild.me).send_messages:
-                try:
-                    await ctx.author.send(f"*Houston, we have a problem!*\nYou tried to use `{ctx.content}` in {ctx.channel.mention}, but I don't have message permissions there.\nGive me perms and try again!")
-                except discord.Forbidden:
-                    pass # DMs disabled!
+                pass
             else:
                 await bot.invoke(context) # Performance improvement
 
