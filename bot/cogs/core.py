@@ -26,7 +26,6 @@ class CoreCog:
 
     @staticmethod        
     async def on_ready():
-        await pgconnect()
         global pgsql
         pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
         
