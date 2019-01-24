@@ -7,7 +7,7 @@ services:
       context: ./bot
       dockerfile: Dockerfile
   db:
-    image: postgres:latest
+    image: postgres
     volumes:
       - ./.data:/var/lib/postgresql/data
     environment:
