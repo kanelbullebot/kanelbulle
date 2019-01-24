@@ -27,7 +27,7 @@ class CoreCog:
     @staticmethod        
     async def on_ready():
         global pgsql
-        pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
+        pgsql = await asyncpg.connect(user='postgres', database='postgres', host='db')
         
     @commands.command()
     @commands.guild_only()
