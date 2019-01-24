@@ -10,6 +10,3 @@ services:
     image: postgres
     volumes:
       - ./.data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: kanelbulle
-      POSTGRES_DB: kanelbulledb
