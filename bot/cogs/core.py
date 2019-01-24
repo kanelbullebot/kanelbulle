@@ -23,14 +23,13 @@ class CoreCog:
     #     except:
     #         print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
 
-    async def pgconnect():
-        global pgsql
-        pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
 
     @staticmethod        
     async def on_ready():
         await pgconnect()
-    
+        global pgsql
+        pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
+        
     @commands.command()
     @commands.guild_only()
     async def serverstats(self, ctx, *, guildid: int = None):
