@@ -1,6 +1,8 @@
 version: '3'
 services:
   bot:
+    depends_on:
+      - db
     build:
       context: ./bot
       dockerfile: Dockerfile
