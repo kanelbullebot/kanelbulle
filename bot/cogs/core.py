@@ -6,6 +6,8 @@ import contextlib
 import traceback
 import textwrap
 import io
+import asyncpg
+import asyncio
 import wikipedia
 
 class CoreCog:
@@ -20,9 +22,16 @@ class CoreCog:
     #         r = redis.Redis(host='localhost', port=6379, db=0)
     #     except:
     #         print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
+
+    async def pgconnect():
+        try:
+            global pgsql
+            pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
+        except:
+            print("Connection to PostgreSQL has failed. [KANELBULLE==/==>PostgreSQL]")
             
-    # async def on_ready():
-    #     await redisconnect()
+    async def on_ready():
+        await pgconnect()
     
     @commands.command()
     @commands.guild_only()
