@@ -24,11 +24,8 @@ class CoreCog:
     #         print("Connection to redis has failed. [KANELBULLE==/==>REDIS]")
 
     async def pgconnect():
-        try:
-            global pgsql
-            pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
-        except:
-            print("Connection to PostgreSQL has failed. [KANELBULLE==/==>PostgreSQL]")
+        global pgsql
+        pgsql = await asyncpg.connect(user='kanelbulle', database='kanelbulledb', host='db')
             
     async def on_ready():
         await pgconnect()
