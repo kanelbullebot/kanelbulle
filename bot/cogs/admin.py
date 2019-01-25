@@ -42,6 +42,8 @@ class AdminCog:
             self.bot.load_extension('cogs.fortnite')
             self.bot.unload_extension('cogs.moderating')
             self.bot.load_extension('cogs.moderating')
+            self.bot.unload_extension('cogs.random')
+            self.bot.load_extension('cogs.random')
             self.bot.unload_extension('cogs.admin')
             self.bot.load_extension('cogs.admin')
         except Exception as e:
