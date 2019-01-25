@@ -19,6 +19,13 @@ class RandomCog:
         else:
             await ctx.send("tails")
 
+    @commands.command(name='randomnum')
+    async def fstats(self, ctx, val1: int, val2: int):
+        try:
+            randomval = random.randint(val1,val2)
+            await ctx.send(randomval)
+        except:
+            raise commands.BadArgument(message=f"Value(s) specified are invalid.")
 
 # Add random cog to main instance.
 def setup(bot):
