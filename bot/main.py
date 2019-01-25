@@ -32,7 +32,8 @@ def get_prefix(bot, message):
 initial_extensions = ['cogs.core',
                       'cogs.admin',
                       'cogs.moderating',
-                      'cogs.fortnite']
+                      'cogs.fortnite',
+                      'cogs.random']
 
 log_channel = None
 
