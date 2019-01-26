@@ -1,5 +1,17 @@
 version: '3'
 services:
+  web:
+    depends_on:
+      - db
+    environment:
+      - OAUTH2_CLIENT_ID=clientid
+      - OAUTH2_CLIENT_SECRET=secret
+      - OAUTH2_CALLBACK=callback
+    ports:
+      - "23399:23399"
+    build:
+      context: ./web
+      dockerfile: Dockerfile
   bot:
     depends_on:
       - db
