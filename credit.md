@@ -1,4 +1,5 @@
 # These are some repos and people that made all of this possible!
+# Also a list of licences for all code, not developed by me, nor sent in as a PR/contribution directly.
 
 ## Eval Command - https://github.com/Rapptz/RoboDanny by Rapptz
 License for the software/code used:
@@ -50,7 +51,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Dashboard frontend - https://www.creative-tim.com/product/black-dashboard-react# by Creative Tim
+## Dashboard frontend -https://github.com/creativetimofficial/black-dashboard-react by Creative Tim
 
 MIT License
 
