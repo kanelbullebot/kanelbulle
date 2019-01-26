@@ -7,4 +7,4 @@ ADD requirements.txt /opt/KanelbulleWeb
 
 WORKDIR /opt/KanelbulleWeb/
 RUN pip install -r requirements.txt
-CMD [ "python", "./main.py" ]
+CMD [ "python", "./serve.py" ]
