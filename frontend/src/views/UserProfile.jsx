@@ -155,11 +155,6 @@ class UserProfile extends React.Component {
                     <div className="block block-three" />
                     <div className="block block-four" />
                     <a href="#pablo" onClick={e => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="avatar"
-                        src={require("assets/img/emilyz.jpg")}
-                      />
                       <h5 className="title">Mike Andrew</h5>
                     </a>
                     <p className="description">Ceo/Co-Founder</p>
