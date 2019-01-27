@@ -11,7 +11,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "routes.js";
 
-import logo from "assets/img/react-logo.png";
+import logo from "https://images.discordapp.net/avatars/483286872748064774/5889ec6ab07e4b72aa4993c84080aafb.png?size=512";
 
 var ps;
 
