@@ -53,6 +53,8 @@ async def on_ready():
     print('Signed into bot user.')
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
+    global aiohttpsession
+    aiohttpsession = aiohttp.ClientSession()
     global log_channel
     log_channel = bot.get_channel(returnconfig["log_channel"])
     setattr(bot, "log_channel", log_channel)
@@ -73,11 +75,22 @@ async def on_guild_join(guild):
         await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
         await guild.leave()
     else:
+        url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
+        headers = {"Authorization": returnconfig['discord_bots_token']}
+        payload = {'guildCount': (len(bot.guilds))}
+        await aiohttpsession.post(url, data=payload, headers=headers)
         if guild.system_channel:
             try:
                 await guild.system_channel.send("Hi! I'm Kanelbulle, thank you for adding me! My prefix is `<.`")
             except discord.Forbidden:
                 pass
+
+@bot.event
+async def on_guild_remove():
+    url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
+    headers = {"Authorization": returnconfig['discord_bots_token']}
+    payload = {'guildCount': (len(bot.guilds))}
+    await aiohttpsession.post(url, data=payload, headers=headers)
 
 @bot.event
 async def on_message(ctx):
