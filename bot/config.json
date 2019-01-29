@@ -1,5 +1,6 @@
 {
   "token": "BOT_TOKEN",
+  "bot_id" "BOT_ID",
   "discord_bots_token": "DISCORD_BOTS_TOKEN",
   "giphy_token": "GIPHY_TOKEN",
   "webhook_channel": "WEBHOOK_CHANNEL",
