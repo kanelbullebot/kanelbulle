@@ -90,7 +90,7 @@ async def on_guild_join(guild):
                 pass
 
 @bot.event
-async def on_guild_remove():
+async def on_guild_remove(guild):
     url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
     headers = {"Authorization": returnconfig['discord_bots_token']}
     payload = {'guildCount': (len(bot.guilds))}
