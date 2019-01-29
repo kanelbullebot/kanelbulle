@@ -55,6 +55,10 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
     global aiohttpsession
     aiohttpsession = aiohttp.ClientSession()
+    url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
+    headers = {"Authorization": returnconfig['discord_bots_token']}
+    payload = {'guildCount': (len(bot.guilds))}
+    await aiohttpsession.post(url, data=payload, headers=headers)
     global log_channel
     log_channel = bot.get_channel(returnconfig["log_channel"])
     setattr(bot, "log_channel", log_channel)
