@@ -12,20 +12,38 @@ class RandomCog:
 
 
     @commands.command(name='coinflip')
-    async def fstats(self, ctx):
-        side = random.randint(1,2)
-        if side == 1:
-            await ctx.send("heads")
+    async def coinflip(self, ctx):
+        try:
+            with open(f"configs/{ctx.guild.id}.yml") as gconfig:
+                guildsettings = yaml.safe_load(gconfig)
+        except:
+            await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
+        if guildsettings["commands"]["random"]["enabled"] == True:
+            side = random.randint(1,2)
+            if side == 1:
+                await ctx.send("heads")
+            else:
+                await ctx.send("tails")
         else:
-            await ctx.send("tails")
+            await ctx.send("That command is not enabled for this server! (If you are the server owner you can change enabled/disabled commands by contacting a global admin.")
+
 
     @commands.command(name='randomnum')
-    async def fstats(self, ctx, val1: int, val2: int):
+    async def randomnum(self, ctx, val1: int, val2: int):
         try:
-            randomval = random.randint(val1,val2)
-            await ctx.send(randomval)
+            with open(f"configs/{ctx.guild.id}.yml") as gconfig:
+                guildsettings = yaml.safe_load(gconfig)
         except:
-            raise commands.BadArgument(message=f"Value(s) specified are invalid.")
+            await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
+        if guildsettings["commands"]["random"]["enabled"] == True:
+            try:
+                randomval = random.randint(val1,val2)
+                await ctx.send(randomval)
+            except:
+                raise commands.BadArgument(message=f"Value(s) specified are invalid.")
+        else:
+            await ctx.send("That command is not enabled for this server! (If you are the server owner you can change enabled/disabled commands by contacting a global admin.")
+
 
 # Add random cog to main instance.
 def setup(bot):
