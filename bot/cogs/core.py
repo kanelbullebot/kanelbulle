@@ -133,7 +133,16 @@ class CoreCog:
         total = first + second
         await ctx.send(f'The sum of **{first}** and **{second}**  is  **{total}**')
 
-
+    @commands.command(name='setup')
+    @commands.guild_only()
+    async def setup_config(self, ctx):
+        """Create a initial setup file for your server."""
+        if ctx.author == ctx.guild.owner:
+            setupmsg = await ctx.send("Setup initiated. :ok_hand:")
+            copyfile("configs/standard.yml", f"configs/{ctx.guild.id}.yml")
+            await setupmsg.edit(content="Setup done :white_check_mark:")
+        else:
+            await ctx.send("Only the server owner can run the setup command.")
 
     @commands.command(name="wiki", aliases=["wikipedia"])
     async def search_wiki(self, ctx, *, tosearch: str):
