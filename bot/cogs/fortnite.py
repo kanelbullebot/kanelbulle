@@ -19,6 +19,7 @@ class FortniteCog:
                 guildsettings = yaml.safe_load(gconfig)
         except:
             await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
+            return
         if guildsettings["commands"]["fortnite"]["enabled"] == True:
             url = "https://api.scoutsdk.com/graph"
             headers = {
