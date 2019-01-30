@@ -9,6 +9,7 @@ import io
 import asyncpg
 import asyncio
 import wikipedia
+from shutil import copyfile
 
 class CoreCog:
     """CoreCog"""
