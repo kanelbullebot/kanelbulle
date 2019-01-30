@@ -19,6 +19,7 @@ class RandomCog:
                 guildsettings = yaml.safe_load(gconfig)
         except:
             await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
+            return
         if guildsettings["commands"]["random"]["enabled"] == True:
             side = random.randint(1,2)
             if side == 1:
@@ -36,6 +37,7 @@ class RandomCog:
                 guildsettings = yaml.safe_load(gconfig)
         except:
             await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
+            return
         if guildsettings["commands"]["random"]["enabled"] == True:
             try:
                 randomval = random.randint(val1,val2)
