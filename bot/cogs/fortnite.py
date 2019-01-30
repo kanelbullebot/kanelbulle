@@ -16,7 +16,6 @@ class FortniteCog:
     async def fstats(self, ctx, *, username: str):
         try:
             with open(f"configs/{ctx.guild.id}.yml") as gconfig:
-                print("File Found")
                 guildsettings = yaml.safe_load(gconfig)
         except:
             await ctx.send("Uh oh, something probably went **entirely wrong** but it seems like your server is lacking a configuration, type ``<.setup`` to create a default config.")
