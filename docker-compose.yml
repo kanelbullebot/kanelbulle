@@ -18,15 +18,6 @@ services:
     build:
       context: ./bot
       dockerfile: Dockerfile
-  frontend:
-    depends_on:
-      - db
-      - web
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
   db:
     image: postgres
     volumes:
