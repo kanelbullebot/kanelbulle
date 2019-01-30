@@ -1,0 +1,7 @@
+commands:
+  fortnite:
+    enabled: True
+  moderation:
+    enabled: True
+  random:
+    enabled: True
