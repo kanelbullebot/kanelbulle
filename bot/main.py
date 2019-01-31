@@ -202,7 +202,7 @@ bot.remove_command('help')
 async def help(ctx):
     embed = discord.Embed(title="Kanelbulle Docs", description="Made with <3 by Tristan Farkas.", color=0xedab49)
 
-    embed.add_field(name="Docs", value="The docs for Kanelbulle commands is available at: https://kanelbulle.farkasdev.com/commands", inline=False)
+    embed.add_field(name="Docs", value="The docs for Kanelbulle commands is available at: https://docs.kanelbulle.farkasdev.com/commands", inline=False)
 
     await ctx.send(embed=embed)
 
