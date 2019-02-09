@@ -66,7 +66,7 @@ class CoreCog:
             await ctx.send(content="", embed=userinfo)
         else:
             try:
-                selecteduserinfostats = self.bot.get_guild(userid)
+                selecteduserinfostats = self.bot.get_member(userid)
                 userinfo = discord.Embed()
                 userinfo.set_thumbnail(url=selecteduserinfostats.avatar_url)
                 usernameforselected = selecteduserinfostats.name + selecteduserinfostats.discriminator
