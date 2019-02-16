@@ -5,3 +5,4 @@ aiohttp
 sentry-sdk
 redis==3.0.1
 asyncpg==0.18.3
+datadog
