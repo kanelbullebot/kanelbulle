@@ -3,6 +3,9 @@
 import discord
 from discord.ext import commands
 import datetime, re
+from datadog import initialize
+from datadog import api
+from datadog import statsd
 import json, asyncio
 import copy
 import logging
@@ -17,6 +20,12 @@ import sys
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
+options = {
+    'api_key':returnconfig['datadog_api_key'],
+    'app_key':returnconfig['datadog_app_key']
+}
+
+initialize(**options)
 
 def get_prefix(bot, message):
 
@@ -50,7 +59,11 @@ for extension in initial_extensions:
 @bot.event
 async def on_ready():
     print(bot.user.name)
-    print('Signed into bot user.')
+    print('READY event received.')
+    title = "READY event received - Kanelbulle"
+    text = 'The bot received a READY event from Discords API.'
+    tags = ['version:1', 'application:bot']
+    api.Event.create(title=title, text=text, tags=tags)
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
     global aiohttpsession
@@ -69,6 +82,9 @@ async def on_guild_join(guild):
     headers = {"Authorization": returnconfig['discord_bots_token']}
     payload = {'guildCount': (len(bot.guilds))}
     await aiohttpsession.post(url, data=payload, headers=headers)
+    title = f"New guild added: {guild.name}"
+    text = f"Guild ID: {guild.id}, Guild Region: {guild.region}, Member Count: {guild.member_count} and the server owners ID: {guild.owner_id}"
+    tags = ['version:1', 'application:bot']
     serverjoinembed = discord.Embed(title="A new server has added Kanelbulle!", description="YAAAAAAAAAAY!", color=0xedab49)
     serverjoinembed.add_field(name="Server name", value=(guild.name), inline=False)
     serverjoinembed.add_field(name="Server region", value=(guild.region), inline=False)
@@ -121,18 +137,25 @@ async def on_message(ctx):
 async def on_command_error(ctx: commands.Context, error):
     if isinstance(error, commands.NoPrivateMessage):
         await ctx.send("This command can not be used through DMs!")
+        statsd.increment('bot.errorNoPrivateMessage')
     elif isinstance(error, commands.BotMissingPermissions):
         await ctx.send(f"Welp, this is awkward.\nI do not have enough permissions to run {ctx.command}!```error```")
+        statsd.increment('bot.errorBotMissingPermissions')
     elif isinstance(error, commands.DisabledCommand):
         await ctx.send("This command is currently disabled and can not be used.")
+        statsd.increment('bot.errorDisabledCommand')
     elif isinstance(error, commands.CheckFailure):
         await ctx.send(":lock: You don't have enough permissions to run this command!")
+        statsd.increment('bot.errorCheckFailure')
     elif isinstance(error, commands.CommandOnCooldown):
         await ctx.send(f"Woah there, you're too *hyped!*\nYou're on a cooldown.```{error}```")
+        statsd.increment('bot.errorCommandOnCooldown')
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"You are missing required arguments!\n{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
+        statsd.increment('bot.errorCommandOnCooldown')
     elif isinstance(error, commands.BadArgument):
         await ctx.send(f"One of your arguments is incorrect!\n`{error}`\n\nCommand usage: <.{ctx.command.signature}`")
+        statsd.increment('bot.errorBadArgument')
     elif isinstance(error, commands.CommandNotFound):
         return
 
