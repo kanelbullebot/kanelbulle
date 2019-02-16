@@ -62,32 +62,25 @@ async def on_ready():
     global log_channel
     log_channel = bot.get_channel(returnconfig["log_channel"])
     setattr(bot, "log_channel", log_channel)
-    with open("whitelist.json") as whitelistf:
-        server_whitelist = json.load(whitelistf)
-    for guild in bot.guilds:
-        if not guild.id in server_whitelist:
-            print(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
-            await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
-            await guild.leave()
 
 @bot.event
 async def on_guild_join(guild):
-    with open("whitelist.json") as whitelistf:
-        server_whitelist = json.load(whitelistf)
-    if not guild.id in server_whitelist:
-        print(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
-        await log_channel.send(f"Kanelbulle joined a non-whitelisted server, {guild.name} ({guild.id}). Kanelbulle is leaving.")
-        await guild.leave()
-    else:
-        url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
-        headers = {"Authorization": returnconfig['discord_bots_token']}
-        payload = {'guildCount': (len(bot.guilds))}
-        await aiohttpsession.post(url, data=payload, headers=headers)
-        if guild.system_channel:
-            try:
-                await guild.system_channel.send("Hi! I'm Kanelbulle, thank you for adding me! My prefix is `<.`")
-            except discord.Forbidden:
-                pass
+    url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
+    headers = {"Authorization": returnconfig['discord_bots_token']}
+    payload = {'guildCount': (len(bot.guilds))}
+    await aiohttpsession.post(url, data=payload, headers=headers)
+    serverjoinembed = discord.Embed(title="A new server has added Kanelbulle!", description="YAAAAAAAAAAY!", color=0xedab49)
+    serverjoinembed.add_field(name="Server name", value=(guild.name), inline=False)
+    serverjoinembed.add_field(name="Server region", value=(guild.region), inline=False)
+    serverjoinembed.add_field(name="Server ID", value=(guild.id), inline=False)
+    serverjoinembed.add_field(name="Servers member count", value=(guild.member_count), inline=False)
+    serverjoinembed.add_field(name="Server owners ID", value=(guild.owner_id), inline=False)
+    await log_channel.send(embed=serverjoinembed)
+    if guild.system_channel:
+        try:
+            await guild.system_channel.send("Hi! I'm Kanelbulle, thank you for adding me! My prefix is `<.`")
+        except discord.Forbidden:
+            pass
 
 @bot.event
 async def on_guild_remove(guild):
