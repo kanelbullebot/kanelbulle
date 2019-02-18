@@ -86,7 +86,8 @@ async def on_guild_join(guild):
     title = f"New guild added: {guild.name}"
     text = f"Guild ID: {guild.id}, Guild Region: {guild.region}, Member Count: {guild.member_count} and the server owners ID: {guild.owner_id}"
     tags = ['version:1', 'application:bot']
-    serverjoinembed = discord.Embed(title="A new server has added Kanelbulle!", description="YAAAAAAAAAAY!", color=0xedab49)
+    serverjoinembed = discord.Embed(title="A new server has added Kanelbulle!", description="YAAAAAAAAAAY!", color=0xedab49)'
+    serverjoinembed.set_thumbnail(url=guild.icon_url)
     serverjoinembed.add_field(name="Server name", value=(guild.name), inline=False)
     serverjoinembed.add_field(name="Server region", value=(guild.region), inline=False)
     serverjoinembed.add_field(name="Server ID", value=(guild.id), inline=False)
