@@ -34,11 +34,11 @@ class ApexCog:
         url = "https://public-api.tracker.gg/apex/v1/standard/profile/" + apexplatform + "/" + (username)
         headers = {"TRN-Api-Key": returnconfig['Apex-Api-Key']}
         async with httpsession.get(url, headers=headers) as resp:
+            if resp.status == 404:
+                await ctx.send("That user could not be found for the selected platform.")
+                await httpsession.close()
+                return
             responsejsondecoded = await resp.json()
-        if resp.status == 404:
-            await ctx.send("That user could not be found for the selected platform.")
-            await httpsession.close()
-            return
 
         apexstatsembed = discord.Embed(title='Apex Stats',
                             description='Showing Apex stats! Through the magic of Kanelbulle.',
