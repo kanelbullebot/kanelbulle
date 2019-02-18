@@ -44,6 +44,8 @@ class AdminCog:
             self.bot.load_extension('cogs.moderating')
             self.bot.unload_extension('cogs.random')
             self.bot.load_extension('cogs.random')
+            self.bot.unload_extension('cogs.apex')
+            self.bot.load_extension('cogs.apex')
             self.bot.unload_extension('cogs.admin')
             self.bot.load_extension('cogs.admin')
         except Exception as e:

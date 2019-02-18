@@ -42,7 +42,8 @@ initial_extensions = ['cogs.core',
                       'cogs.admin',
                       'cogs.moderating',
                       'cogs.fortnite',
-                      'cogs.random']
+                      'cogs.random',
+                      'cogs.apex']
 
 log_channel = None
 
