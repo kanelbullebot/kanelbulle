@@ -7,5 +7,8 @@
   "webhook_id": "WEBHOOK_ID",
   "sentry_dsn": "SENTRY_DSN",
   "log_channel": "LOG_CHANNEL_ID",
-  "dev_role": "DEV_ROLE_ID"
+  "dev_role": "DEV_ROLE_ID",
+  "datadog_api_key": "datadog_api_key",
+  "datadog_app_key": "datadog_app_key",
+  "Apex-Api-Key": "Apex-Api-Key"
 }
