@@ -47,7 +47,7 @@ class ApexCog:
         apexstatsembed.add_field(name="Username", value=(responsejsondecoded["data"]["metadata"]["platformUserHandle"]))
         apexstatsembed.add_field(name="Level", value=(responsejsondecoded["data"]["stats"][0]["value"]))
         apexstatsembed.add_field(name="Kills", value=(responsejsondecoded["data"]["stats"][1]["value"]))
-        apexstatsembed.add_field(name="Games Played", value="Games Played is currently unavailable while our stats provider is fixing their issues.)
+        apexstatsembed.add_field(name="Games Played", value="Games Played is currently unavailable while our stats provider is fixing their issues.")
 
         message = "Showing Apex Stats for: " + (responsejsondecoded["data"]["metadata"]["platformUserHandle"])
         await ctx.send(content=message, embed=apexstatsembed)
