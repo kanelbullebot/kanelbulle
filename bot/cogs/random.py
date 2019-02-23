@@ -4,7 +4,7 @@ import random
 import yaml
 
 
-class RandomCog:
+class RandomCog(commands.Cog):
     """RandomCog"""
 
 

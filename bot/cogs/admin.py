@@ -9,7 +9,7 @@ import contextlib
  # Declase bash scripts to run here.
 bashgitpull = "git pull"
 
-class AdminCog:
+class AdminCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot

@@ -8,7 +8,7 @@ import json
 with open("config.json") as dataf:
     returnconfig = json.load(dataf)
 
-class ApexCog:
+class ApexCog(commands.Cog):
     """ApexCog"""
 
 

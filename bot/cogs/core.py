@@ -11,13 +11,13 @@ import asyncio
 import wikipedia
 from shutil import copyfile
 
-class CoreCog:
+class CoreCog(commands.Cog):
     """CoreCog"""
 
     def __init__(self, bot):
         self.bot = bot
-        
-        
+
+
     @commands.command()
     @commands.guild_only()
     async def serverstats(self, ctx, *, guildid: int = None):
@@ -41,7 +41,7 @@ class CoreCog:
                 await ctx.send(content="", embed=serverstats)
             except:
                 raise commands.BadArgument(message=f"Server/Guild {guildid} could not be found.")
-                
+
     @commands.command()
     @commands.guild_only()
     async def userinfo(self, ctx, *, userid: int = None):
@@ -60,7 +60,7 @@ class CoreCog:
                         status = "AFK <:KanelbulleAFK:528992291285630986>"
                     else:
                         status = "Offline <:KanelbulleOffline:528992410261258270>"
-                        
+
             userinfo.add_field(name="Nickname", value=ctx.author.nick, inline=False)
             userinfo.add_field(name="Status", value=status, inline=False)
             await ctx.send(content="", embed=userinfo)
@@ -82,13 +82,13 @@ class CoreCog:
                             status = "AFK <:KanelbulleAFK:528992291285630986>"
                         else:
                             status = "Offline <:KanelbulleOffline:528992410261258270>"
-                        
+
                 userinfo.add_field(name="Nickname", value=ctx.author.nick, inline=False)
                 userinfo.add_field(name="Status", value=status, inline=False)
                 await ctx.send(content="", embed=userinfo)
             except:
                     raise commands.BadArgument(message=f"User {userid} could not be found.")
-                
+
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
         if not isinstance(ctx.channel, discord.DMChannel):

@@ -4,7 +4,7 @@ import requests
 import json
 import yaml
 
-class FortniteCog:
+class FortniteCog(commands.Cog):
     """FortniteCog"""
 
 

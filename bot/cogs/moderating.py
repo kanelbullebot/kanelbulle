@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class ModCog:
+class ModCog(commands.Cog):
     """ModCog"""
 
     def __init__(self, bot):
@@ -84,7 +84,7 @@ class ModCog:
     async def clean(self, ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send('⚠️ Thats not a valid command! ⚠️')
-            
+
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
     @clean.command()
