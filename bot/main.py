@@ -15,6 +15,7 @@ import sys
 import json
 import subprocess
 import requests
+from utilities import translate, returncfg
 import sys
 
 with open("config.json") as dataf:
@@ -136,32 +137,45 @@ async def on_message(ctx):
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
+    guildlang = "en_us"
+    guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+    try:
+        guildlang = guildsettings["lang"]
+    except:
+        pass
     if isinstance(error, commands.NoPrivateMessage):
-        await ctx.send("This command can not be used through DMs!")
+        error_string = translate.translate(lang=guildlang, string="fail_noprivatemessage")
+        await ctx.send(error_string)
         statsd.increment('bot.errorNoPrivateMessage')
     elif isinstance(error, commands.BotMissingPermissions):
+        error_string = translate.translate(lang=guildlang, string="fail_MissingPermissions", ctx=ctx)
         await ctx.send(f"Welp, this is awkward.\nI do not have enough permissions to run {ctx.command}!```error```")
         statsd.increment('bot.errorBotMissingPermissions')
     elif isinstance(error, commands.DisabledCommand):
-        await ctx.send("This command is currently disabled and can not be used.")
+        error_string = translate.translate(lang=guildlang, string="fail_DisabledCommand")
+        await ctx.send(error_string)
         statsd.increment('bot.errorDisabledCommand')
     elif isinstance(error, commands.CheckFailure):
-        await ctx.send(":lock: You don't have enough permissions to run this command!")
+        error_string = translate.translate(lang=guildlang, string="fail_CheckFailure")
+        await ctx.send(error_string)
         statsd.increment('bot.errorCheckFailure')
     elif isinstance(error, commands.CommandOnCooldown):
-        await ctx.send(f"Woah there, you're too *hyped!*\nYou're on a cooldown.```{error}```")
+        error_string = translate.translate(lang=guildlang, string="fail_CommandOnCooldown", error=error)
+        await ctx.send(error_string)
         statsd.increment('bot.errorCommandOnCooldown')
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"You are missing required arguments!\n{error}`\n\nCommand usage: `<.{ctx.command.signature}`")
+        error_string = translate.translate(lang=guildlang, string="fail_MissingRequiredArgument", error=error, ctx=ctx)
+        await ctx.send(error_string)
         statsd.increment('bot.errorCommandOnCooldown')
     elif isinstance(error, commands.BadArgument):
-        await ctx.send(f"One of your arguments is incorrect!\n`{error}`\n\nCommand usage: <.{ctx.command.signature}`")
+        error_string = translate.translate(lang=guildlang, string="fail_BadArgument", error=error, ctx=ctx)
+        await ctx.send(error_string)
         statsd.increment('bot.errorBadArgument')
     elif isinstance(error, commands.CommandNotFound):
         return
 
     else:
-        await ctx.send(":rotating_light: Uh-Oh! An error just ocurred! The devs are already on it. Sorry my fren! :rotating_light:")
+        await ctx.send(f":rotating_light: Uh-Oh! An error just ocurred! The devs are already on it. Sorry my fren! :rotating_light:")
         if isinstance(ctx.channel, discord.DMChannel):
             used_in = f"DM {ctx.channel.id}"
         else:
@@ -204,11 +218,21 @@ Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embe
 
 @bot.command()
 async def info(ctx):
+    guildlang = "en_us"
+    guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+    try:
+        guildlang = guildsettings["lang"]
+    except:
+        pass
     embedinfo = discord.Embed(title="Kanelbulle Info", description="Some very neat info!", color=0xeee657)
-    embedinfo.add_field(name="Author", value="@tristanfarkas#0001")
-    embedinfo.add_field(name="Github repository", value="https://github.com/trilleplay/kanelbulle/")
-    embedinfo.add_field(name="Guild count", value=f"{len(bot.guilds)}")
-    embedinfo.add_field(name="Invite", value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
+    author_string = translate.translate(lang=guildlang, string="author")
+    embedinfo.add_field(name=author_string, value="@tristanfarkas#0001")
+    repo_string = translate.translate(lang=guildlang, string="repo")
+    embedinfo.add_field(name=repo_string, value="https://github.com/trilleplay/kanelbulle/")
+    guildcount_string = translate.translate(lang=guildlang, string="guild_count")
+    embedinfo.add_field(name=guildcount_string, value=f"{len(bot.guilds)}")
+    invite_string = translate.translate(lang=guildlang, string="invite")
+    embedinfo.add_field(name=invite_string, value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
     embedinfo.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
 
     await ctx.send(embed=embedinfo)
@@ -217,7 +241,14 @@ bot.remove_command('help')
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title="Kanelbulle Docs", description="Made with <3 by Tristan Farkas.", color=0xedab49)
+    guildlang = "en_us"
+    guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+    try:
+        guildlang = guildsettings["lang"]
+    except:
+        pass
+    madewith_string = translate.translate(lang=guildlang, string="helpc_headerdesc")
+    embed = discord.Embed(title="Kanelbulle Docs", description=madewith_string, color=0xedab49)
 
     embed.add_field(name="Docs", value="The docs for Kanelbulle commands is available at: https://docs.kanelbulle.farkasdev.com/commands", inline=False)
 
@@ -225,8 +256,15 @@ async def help(ctx):
 
 @bot.command()
 async def ping(ctx):
+    guildlang = "en_us"
+    guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+    try:
+        guildlang = guildsettings["lang"]
+    except:
+        pass
+    ping_description = translate.translate(lang=guildlang, string="ping_desc")
     latency = bot.latency*1000
-    embedping = discord.Embed(title="Ping!", description="Ping the bot!", color=0xedab49)
+    embedping = discord.Embed(title="Ping!", description=ping_description, color=0xedab49)
 
     embedping.add_field(name="🏓 Latency", value=(latency), inline=False)
 

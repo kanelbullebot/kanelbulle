@@ -4,18 +4,21 @@ import ast
 import redis
 import contextlib
 import traceback
+import json
 import textwrap
 import io
 import asyncpg
 import asyncio
 import wikipedia
 from shutil import copyfile
+from utilities import translate, returncfg
 
 class CoreCog(commands.Cog):
     """CoreCog"""
 
     def __init__(self, bot):
         self.bot = bot
+
 
 
     @commands.command()
@@ -91,6 +94,13 @@ class CoreCog(commands.Cog):
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
+        guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+        try:
+            if guildsettings["lang"] == None:
+                guildlang = "en-us"
+        except:
+            guildlang = "en-us"
+
         if not isinstance(ctx.channel, discord.DMChannel):
             if tohug != None:
                 try:
@@ -106,12 +116,15 @@ class CoreCog(commands.Cog):
                     else:
                         await ctx.send(f'{member.mention} was successfully hugged!')
             else:
-                await ctx.send("You hug the air. *smh*")
+                returntousr = translate.translate(lang=guildlang, string="hug_no_arguments", tohug=tohug)
+                await ctx.send(returntousr)
         else:
             if tohug != None:
-                await ctx.send(f"You find yourself in a strange place. You search for something, a {tohug}, unsure what it is even.\nYou search far and wide, and, suddenly, you find {self.client.user.mention}, warning you that this command can't be used in DMs.\nThat was an unexpected ending, wasn't it?")
+                returntousr = translate.translate(lang=guildlang, string="hug_no_DMs", tohug=tohug)
+                await ctx.send(returntousr)
             else:
-                await ctx.send("First, you haven't specified what to hug. Second, this command can't be used in DMs.\nWhat about if we move to a *real server*? duh.")
+                returntousr = translate.translate(lang=guildlang, string="hug_serveral_args_invalid_dms", tohug=tohug)
+                await ctx.send(returntousr)
 
 
     @commands.command(name='add', aliases=['plus'])
@@ -203,7 +216,8 @@ class CoreCog(commands.Cog):
             else:
                 await genlist(results, 2)
         else:
-            await ctx.send(f"I found nothing about `{tosearch}` on Wikipedia, did you commit a typo?")
+            returntousr = translate.translate(lang=guildlang, string="wikipedia_no_page_found", tosearch=tosearch)
+            await ctx.send(returntousr)
 
 
 

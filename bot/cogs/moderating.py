@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from utilities import translate, returncfg
 
 class ModCog(commands.Cog):
     """ModCog"""
@@ -46,7 +47,8 @@ class ModCog(commands.Cog):
     @commands.command(name='kick')
     async def kickusr(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
-        await ctx.send(f":eyes: {str(member)} has been kicked. oof.")
+        returntousr = translate.translate(lang=guildlang, string="kick", user=user)
+        await ctx.send(returntousr)
 
     @commands.command(name='lock')
     @commands.has_permissions(manage_roles=True)
