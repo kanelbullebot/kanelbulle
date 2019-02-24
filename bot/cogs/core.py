@@ -94,12 +94,12 @@ class CoreCog(commands.Cog):
 
     @commands.command()
     async def hug (self, ctx, tohug = None, *, message = None):
+        guildlang = "en"
         guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
         try:
-            if guildsettings["lang"] == None:
-                guildlang = "en-us"
+            guildlang = guildsettings["lang"]
         except:
-            guildlang = "en-us"
+            pass
 
         if not isinstance(ctx.channel, discord.DMChannel):
             if tohug != None:
@@ -148,6 +148,12 @@ class CoreCog(commands.Cog):
 
     @commands.command(name="wiki", aliases=["wikipedia"])
     async def search_wiki(self, ctx, *, tosearch: str):
+        guildlang = "en"
+        guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+        try:
+            guildlang = guildsettings["lang"]
+        except:
+            pass
         await ctx.trigger_typing()
         numbers_stringed = {"one": 1,
         "two": 2,

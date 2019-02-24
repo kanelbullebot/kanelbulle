@@ -46,6 +46,12 @@ class ModCog(commands.Cog):
     @commands.bot_has_permissions(kick_members=True)
     @commands.command(name='kick')
     async def kickusr(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
+        guildlang = "en"
+        guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
+        try:
+            guildlang = guildsettings["lang"]
+        except:
+            pass
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
         returntousr = translate.translate(lang=guildlang, string="kick", user=user)
         await ctx.send(returntousr)

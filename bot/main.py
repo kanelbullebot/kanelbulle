@@ -137,7 +137,7 @@ async def on_message(ctx):
 
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
-    guildlang = "en_us"
+    guildlang = "en"
     guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
     try:
         guildlang = guildsettings["lang"]
@@ -218,7 +218,7 @@ Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embe
 
 @bot.command()
 async def info(ctx):
-    guildlang = "en_us"
+    guildlang = "en"
     guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
     try:
         guildlang = guildsettings["lang"]
@@ -241,7 +241,7 @@ bot.remove_command('help')
 
 @bot.command()
 async def help(ctx):
-    guildlang = "en_us"
+    guildlang = "en"
     guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
     try:
         guildlang = guildsettings["lang"]
@@ -256,7 +256,7 @@ async def help(ctx):
 
 @bot.command()
 async def ping(ctx):
-    guildlang = "en_us"
+    guildlang = "en"
     guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
     try:
         guildlang = guildsettings["lang"]
