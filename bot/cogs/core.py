@@ -7,7 +7,6 @@ import traceback
 import json
 import textwrap
 import io
-import asyncpg
 import asyncio
 import wikipedia
 from shutil import copyfile
@@ -48,7 +47,7 @@ class CoreCog(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def userinfo(self, ctx, *, userid: int = None):
-        if userid == None:
+        if userid is None:
             userinfo = discord.Embed()
             userinfo.set_thumbnail(url=ctx.author.avatar_url)
             userinfo.add_field(name="Username", value=ctx.author, inline=False)
@@ -93,7 +92,7 @@ class CoreCog(commands.Cog):
                     raise commands.BadArgument(message=f"User {userid} could not be found.")
 
     @commands.command()
-    async def hug (self, ctx, tohug = None, *, message = None):
+    async def hug(self, ctx, tohug = None, *, message = None):
         guildlang = "en"
         guildsettings = await returncfg.fetchguildconfig(ctx.guild.id)
         try:
@@ -102,7 +101,7 @@ class CoreCog(commands.Cog):
             pass
 
         if not isinstance(ctx.channel, discord.DMChannel):
-            if tohug != None:
+            if tohug is not None:
                 try:
                     member = await commands.MemberConverter().convert(ctx=ctx, argument=tohug)
                 except:
@@ -119,7 +118,7 @@ class CoreCog(commands.Cog):
                 returntousr = translate.translate(lang=guildlang, string="hug_no_arguments", tohug=tohug)
                 await ctx.send(returntousr)
         else:
-            if tohug != None:
+            if tohug is not None:
                 returntousr = translate.translate(lang=guildlang, string="hug_no_DMs", tohug=tohug)
                 await ctx.send(returntousr)
             else:
@@ -172,7 +171,7 @@ class CoreCog(commands.Cog):
                 return m.author == ctx.author
             msg = await self.bot.wait_for("message", check=check, timeout=60)
             lowered = msg.content.lower()
-            if msg == None:
+            if msg is None:
                 await ctx.send("Timeout reached, aborting...")
             else:
                 try:
@@ -210,9 +209,7 @@ class CoreCog(commands.Cog):
             else:
                 summary = page.summary
             linkname = pagename.replace(" ", "_")
-            wikiembed = discord.Embed(title=f'{pagename} - Wikipedia',
-                            description=f"{summary}\n\n[Read more](https://en.wikipedia.org/wiki/{linkname})",
-                            colour=0x98FB98)
+            wikiembed = discord.Embed(title=f'{pagename} - Wikipedia', description=f"{summary}\n\n[Read more](https://en.wikipedia.org/wiki/{linkname})", colour=0x98FB98)
             wikiembed.set_thumbnail(url=page.images[0])
             await ctx.send(embed=wikiembed)
         results = wikipedia.search(tosearch, 5)

@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import random
 import yaml
 import aiohttp
 import json
@@ -11,14 +10,13 @@ with open("config.json") as dataf:
 class ApexCog(commands.Cog):
     """ApexCog"""
 
-
     def __init__(self, bot):
         self.bot = bot
 
 
     @commands.command(name='apexstats')
     async def apexstatslookup(self, ctx, username, platform: str = None):
-        if platform == None:
+        if platform is None:
             apexplatform = "5"
         elif platform == "pc":
             apexplatform = "5"
@@ -40,9 +38,7 @@ class ApexCog(commands.Cog):
                 return
             responsejsondecoded = await resp.json()
 
-        apexstatsembed = discord.Embed(title='Apex Stats',
-                            description='Showing Apex stats! Through the magic of Kanelbulle.',
-                            colour=0x98FB98)
+        apexstatsembed = discord.Embed(title='Apex Stats', description='Showing Apex stats! Through the magic of Kanelbulle.', colour=0x98FB98)
 
         apexstatsembed.add_field(name="Username", value=(responsejsondecoded["data"]["metadata"]["platformUserHandle"]))
         apexstatsembed.add_field(name="Level", value=(responsejsondecoded["data"]["stats"][0]["value"]))
