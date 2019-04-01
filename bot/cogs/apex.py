@@ -36,6 +36,10 @@ class ApexCog(commands.Cog):
                 await ctx.send("That user could not be found for the selected platform.")
                 await httpsession.close()
                 return
+            if resp.status != 200:
+                await ctx.send("The service that provides Kanelbulle with its statistics is having issues currently. Please wait a while and try again.")
+                await httpsession.close()
+                return
             responsejsondecoded = await resp.json()
 
         apexstatsembed = discord.Embed(title='Apex Stats', description='Showing Apex stats! Through the magic of Kanelbulle.', colour=0x98FB98)
