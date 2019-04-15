@@ -214,6 +214,23 @@ Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embe
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
+@bot.event
+async def on_socket_response(resp):
+    # READY or RESUMED?
+    if resp.get("t") == "READY":
+        data = resp.get("d")
+        ws_url = data["_trace"][0]
+        sessions = data["_trace"][1]
+        # Post to log
+        await asyncio.sleep(1)
+        await log_channel.send("Bot connected with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
+    elif resp.get("t") == "RESUMED":
+        data = resp.get("d")
+        ws_url = data["_trace"][0]
+        sessions = data["_trace"][1]
+        # Post to log
+        await asyncio.sleep(1)
+        await log_channel.send("Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
 
 
 @bot.command()
