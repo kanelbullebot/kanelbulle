@@ -221,18 +221,17 @@ async def on_socket_response(resp):
         data = resp.get("d")
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
-        socket_log_channel = bot.get_channel(returnconfig["log_channel"])
-        await asyncio.sleep(5)
-        await socket_log_channel.send("Bot connected with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
+        url = returnconfig["webhook_url"]
+        payload = {'message': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
+        await aiohttpsession.post(url, data=payload)
     elif resp.get("t") == "RESUMED":
         data = resp.get("d")
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
         # Post to log
-        socket_log_channel = bot.get_channel(returnconfig["log_channel"])
-        await asyncio.sleep(5)
-        await socket_log_channel.send("Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
-
+        url = returnconfig["webhook_url"]
+        payload = {'message': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
+        await aiohttpsession.post(url, data=payload)
 
 @bot.command()
 async def info(ctx):
