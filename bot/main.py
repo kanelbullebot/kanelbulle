@@ -222,7 +222,7 @@ async def on_socket_response(resp):
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
         socket_log_channel = bot.get_channel(returnconfig["log_channel"])
-        await asyncio.sleep(1)
+        await asyncio.sleep(5)
         await socket_log_channel.send("Bot connected with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
     elif resp.get("t") == "RESUMED":
         data = resp.get("d")
@@ -230,7 +230,7 @@ async def on_socket_response(resp):
         sessions = data["_trace"][1]
         # Post to log
         socket_log_channel = bot.get_channel(returnconfig["log_channel"])
-        await asyncio.sleep(1)
+        await asyncio.sleep(5)
         await socket_log_channel.send("Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
 
 
