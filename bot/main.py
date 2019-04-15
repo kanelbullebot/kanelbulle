@@ -223,7 +223,7 @@ async def on_socket_response(resp):
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
         url = returnconfig["webhook_url"]
-        payload = {'message': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
+        payload = {'content': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
         await aiohttpsession.post(url, data=payload)
     elif resp.get("t") == "RESUMED":
         data = resp.get("d")
@@ -231,7 +231,7 @@ async def on_socket_response(resp):
         sessions = data["_trace"][1]
         # Post to log
         url = returnconfig["webhook_url"]
-        payload = {'message': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
+        payload = {'content': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
         await aiohttpsession.post(url, data=payload)
 
 @bot.command()
