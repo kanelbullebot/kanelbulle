@@ -28,6 +28,9 @@ options = {
 
 initialize(**options)
 
+global aiohttpsession
+aiohttpsession = aiohttp.ClientSession()
+
 def get_prefix(bot, message):
 
     prefixes = ['<.']
@@ -68,8 +71,6 @@ async def on_ready():
     api.Event.create(title=title, text=text, tags=tags)
     statusdiscord = discord.Game("Kanelbulle v.1.1.0")
     await bot.change_presence(status=discord.Status.online, activity=statusdiscord)
-    global aiohttpsession
-    aiohttpsession = aiohttp.ClientSession()
     url = "https://discord.bots.gg/api/v1/bots/" + returnconfig['bot_id'] + "/stats"
     headers = {"Authorization": returnconfig['discord_bots_token']}
     payload = {'guildCount': (len(bot.guilds))}
