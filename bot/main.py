@@ -221,16 +221,17 @@ async def on_socket_response(resp):
         data = resp.get("d")
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
-        # Post to log
+        socket_log_channel = bot.get_channel(returnconfig["log_channel"])
         await asyncio.sleep(1)
-        await log_channel.send("Bot connected with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
+        await socket_log_channel.send("Bot connected with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
     elif resp.get("t") == "RESUMED":
         data = resp.get("d")
         ws_url = data["_trace"][0]
         sessions = data["_trace"][1]
         # Post to log
+        socket_log_channel = bot.get_channel(returnconfig["log_channel"])
         await asyncio.sleep(1)
-        await log_channel.send("Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
+        await socket_log_channel.send("Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions))
 
 
 @bot.command()
