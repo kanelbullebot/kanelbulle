@@ -53,7 +53,7 @@ class ModCog(commands.Cog):
         except:
             pass
         await ctx.message.guild.kick(member, reason=f"{ctx.author} (Softban) - {reason}")
-        returntousr = translate.translate(lang=guildlang, string="kick", user=user)
+        returntousr = translate.translate(lang=guildlang, string="kick", user=member)
         await ctx.send(returntousr)
 
     @commands.command(name='lock')
