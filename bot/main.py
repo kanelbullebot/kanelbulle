@@ -268,7 +268,7 @@ async def help(ctx):
     madewith_string = translate.translate(lang=guildlang, string="helpc_headerdesc")
     embed = discord.Embed(title="Kanelbulle Docs", description=madewith_string, color=0xedab49)
 
-    embed.add_field(name="Docs", value="The docs for Kanelbulle commands is available at: https://docs.kanelbulle.farkasdev.com/commands", inline=False)
+    embed.add_field(name="Docs", value="The docs for Kanelbulle commands is available at: https://docs.kanelbulle.party/", inline=False)
 
     await ctx.send(embed=embed)
 
