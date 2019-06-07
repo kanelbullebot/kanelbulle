@@ -215,25 +215,6 @@ Event timestamp (UTC): `{datetime.datetime.utcnow()}`""", embed = traceback_embe
 
   # All of the following commands are currently MANDATORY, these commands are part of the MAIN system other commands are added using a seperate file.
 
-@bot.event
-async def on_socket_response(resp):
-    # READY or RESUMED?
-    if resp.get("t") == "READY":
-        data = resp.get("d")
-        ws_url = data["_trace"][0]
-        sessions = data["_trace"][1]
-        url = returnconfig["webhook_url"]
-        payload = {'content': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
-        await aiohttpsession.post(url, data=payload)
-    elif resp.get("t") == "RESUMED":
-        data = resp.get("d")
-        ws_url = data["_trace"][0]
-        sessions = data["_trace"][1]
-        # Post to log
-        url = returnconfig["webhook_url"]
-        payload = {'content': "Bot resumed connection with gateway **{}** (utilising session server **{}**).".format(ws_url, sessions)}
-        await aiohttpsession.post(url, data=payload)
-
 @bot.command()
 async def info(ctx):
     guildlang = "en"
