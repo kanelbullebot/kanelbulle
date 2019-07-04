@@ -17,7 +17,7 @@ class AdminCog(commands.Cog):
 
     @commands.command(name='reload', hidden=True)
     @commands.is_owner()
-    async def cog_reload(self, ctx, *, cog: str):
+    async def system_cog_reload(self, ctx, *, cog: str):
         """Command which Reloads a Module.
         Remember to use dot path. e.g: cogs.owner"""
 
@@ -31,7 +31,7 @@ class AdminCog(commands.Cog):
 
     @commands.command(name='hotreload', hidden=True)
     @commands.is_owner()
-    async def cog_reload(self, ctx):
+    async def system_cog_hotreload(self, ctx):
         """We get the latest updates to the whitelisted cogs from Git."""
 
         try:
