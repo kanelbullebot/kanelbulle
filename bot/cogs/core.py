@@ -11,6 +11,7 @@ import asyncio
 import wikipedia
 from shutil import copyfile
 from utilities import translate, returncfg
+from discord.utils import escape_mentions, escape_markdown
 
 class CoreCog(commands.Cog):
     """CoreCog"""
@@ -109,9 +110,9 @@ class CoreCog(commands.Cog):
                 else:
                     if member.bot:
                         if member == self.bot.user:
-                            await ctx.send(f"You want to hug me? Thanks friend <:blobheart:466609019050524673>")
+                            await ctx.send(f"You want to hug me? Thanks friend! <:meowheart:351097460589854720>")
                     if message:
-                        await ctx.send(f'{member.mention} was successfully hugged! "{message}"')
+                        await ctx.send(f'{member.mention} was successfully hugged! "{escape_markdown(text=escape_mentions(message))}"')
                     else:
                         await ctx.send(f'{member.mention} was successfully hugged!')
             else:

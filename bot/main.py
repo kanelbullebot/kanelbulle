@@ -231,7 +231,7 @@ async def info(ctx):
     guildcount_string = translate.translate(lang=guildlang, string="guild_count")
     embedinfo.add_field(name=guildcount_string, value=f"{len(bot.guilds)}")
     invite_string = translate.translate(lang=guildlang, string="invite")
-    embedinfo.add_field(name=invite_string, value="Right now Kanelbulle is private due to resource limitations. If you would like to apply/request access, you may do so over at my discord server: https://discord.gg/FBMrcYM in the #invite-kanelbulle channel. ")
+    embedinfo.add_field(name=invite_string, value="https://discordapp.com/oauth2/authorize?client_id=483286872748064774&permissions=268823767&scope=bot")
     embedinfo.set_image(url="https://trilleplay.github.io/kanelbulle/Kanelbulle%20Full_Logo.png")
 
     await ctx.send(embed=embedinfo)
